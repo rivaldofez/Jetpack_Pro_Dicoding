@@ -18,7 +18,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(activityMainBinding.root)
 
         mainViewModel = MainViewModel(CuboidModel())
-
         activityMainBinding.btnSave.setOnClickListener(this)
         activityMainBinding.btnCalculateSurfaceArea.setOnClickListener(this)
         activityMainBinding.btnCalculateCircumference.setOnClickListener(this)
