@@ -1,4 +1,4 @@
-package com.rivaldofez.academy
+package com.rivaldofez.moviers
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.rivaldofez.academy", appContext.packageName)
+        assertEquals("com.rivaldofez.moviers", appContext.packageName)
     }
 }

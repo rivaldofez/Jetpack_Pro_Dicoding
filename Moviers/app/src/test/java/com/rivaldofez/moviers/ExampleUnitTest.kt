@@ -1,4 +1,4 @@
-package com.rivaldofez.academy
+package com.rivaldofez.moviers
 
 import org.junit.Test
 
