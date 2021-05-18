@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Moviers">
-        <activity android:name=".MainActivity">
+        <activity android:name=".ui.home.HomeActivity"></activity>
+        <activity
+            android:name=".ui.splash.SplashActivity"
+            android:theme="@style/Theme.Moviers.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
