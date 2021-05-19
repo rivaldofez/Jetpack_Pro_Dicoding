@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Moviers</string>
     <string name="logo_moviers">Logo Moviers</string>
+    <string name="movie_posters">Movie Posters</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

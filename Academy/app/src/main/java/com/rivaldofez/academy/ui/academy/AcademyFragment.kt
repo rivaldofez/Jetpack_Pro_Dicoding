@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rivaldofez.academy.databinding.FragmentAcademyBinding
-import com.rivaldofez.academy.utils.DataDummy
 
 class AcademyFragment : Fragment() {
 

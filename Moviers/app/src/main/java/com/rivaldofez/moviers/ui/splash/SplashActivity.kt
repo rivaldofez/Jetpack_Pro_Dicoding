@@ -13,7 +13,7 @@ import com.rivaldofez.moviers.ui.home.HomeActivity
 
 class SplashActivity : AppCompatActivity() {
     companion object {
-        private val SPLASH_TIME : Long = 3000
+        private const val SPLASH_TIME : Long = 3000
     }
 
     private lateinit var splashBinding: ActivitySplashBinding
@@ -28,8 +28,8 @@ class SplashActivity : AppCompatActivity() {
 
         Handler(Looper.getMainLooper()).postDelayed({
             startActivity(Intent(this, HomeActivity::class.java))
-            splashBinding.progressSplash.visibility = View.GONE
             finish()
+            splashBinding.progressSplash.visibility = View.INVISIBLE
         }, SPLASH_TIME)
     }
 }
