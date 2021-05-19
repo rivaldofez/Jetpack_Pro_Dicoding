@@ -86,7 +86,7 @@ object DataDummy {
             overview = "Cars fly, trees fight back, and a mysterious house-elf comes to warn Harry Potter at the start of his second year at Hogwarts. Adventure and danger await when bloody writing on a wall announces: The Chamber Of Secrets Has Been Opened. To save Hogwarts will require all of Harry, Ron and Hermione’s magical abilities and courage.",
             rating = 9,
             studio = "Warner Bros. Pictures",
-            posterPath = "https://image.tmdb.org/t/p/w500/"
+            posterPath = "https://image.tmdb.org/t/p/w500/https://image.tmdb.org/t/p/w500/tmlDFIUpGRKiuWm9Ixc6CYDk4y0.jpg"
         ))
         movies.add(MovieEntity(
             id = 49018,

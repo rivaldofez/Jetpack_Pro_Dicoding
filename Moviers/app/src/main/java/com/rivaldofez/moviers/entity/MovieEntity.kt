@@ -10,6 +10,6 @@ data class MovieEntity (
     var overview: String,
     var date: String,
     var rating: Int,
-    var studio: String
+    var studio: String,
     var posterPath: String
 ):Parcelable

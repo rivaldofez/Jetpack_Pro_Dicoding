@@ -9,7 +9,7 @@ data class TvShowEntity (
         var title: String,
         var overview: String,
         var date: String,
-        var status: String
+        var status: String,
         var rating: Int,
         var episode: Int,
         var studio: String,
