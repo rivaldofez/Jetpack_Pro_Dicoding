@@ -61,18 +61,19 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
-                    android:maxLines="1"
+                    android:layout_marginEnd="16dp"
                     android:ellipsize="end"
-                    android:textSize="18sp"
+                    android:maxLines="2"
                     android:textColor="@color/white"
+                    android:textSize="18sp"
                     android:textStyle="bold"
-                    app:layout_constraintEnd_toStartOf="@+id/tv_episode"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="The Flash"/>
+                    tools:text="The Flash" />
 
                 <RatingBar
-                    android:id="@+id/rating_tv"
+                    android:id="@+id/rating_movie"
                     style="?android:attr/ratingBarStyleSmall"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -85,28 +86,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_title" />
 
-                <TextView
-                    android:id="@+id/tv_status"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="4dp"
-                    android:text="@string/status_title"
-                    android:textColor="@color/white"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/rating_tv" />
-
-                <TextView
-                    android:id="@+id/tv_episode"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:textColor="@color/white"
-                    android:text="@string/eps_title"
-                    android:textAlignment="center"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>

@@ -36,7 +36,8 @@ class MovieFragment : Fragment(), MovieFragmentCallback {
 
     override fun onMovieClick(movie: MovieEntity) {
         Toast.makeText(context,"Click item ${movie.title}",Toast.LENGTH_SHORT).show()
-        val intent = Intent(context, DetailTvShow::class.java)
+        val intent = Intent(context, DetailMovie::class.java)
+        intent.putExtra(DetailMovie.EXTRA_MOVIE, movie.id)
         requireContext().startActivity(intent)
     }
 }

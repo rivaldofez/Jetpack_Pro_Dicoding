@@ -11,5 +11,6 @@ data class MovieEntity(
     var date: String,
     var rating: Float,
     var studio: String,
-    var posterPath: String
+    var posterPath: String,
+    var backdropPath: String
 ):Parcelable

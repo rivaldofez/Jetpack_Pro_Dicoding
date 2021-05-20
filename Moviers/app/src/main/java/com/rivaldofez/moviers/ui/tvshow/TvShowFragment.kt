@@ -1,5 +1,6 @@
 package com.rivaldofez.moviers.ui.tvshow
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -36,6 +37,9 @@ class TvShowFragment : Fragment(), TvShowFragmentCallback {
 
     override fun onTvShowClick(tvShow: TvShowEntity) {
         Toast.makeText(context,"Click item ${tvShow.title}", Toast.LENGTH_SHORT).show()
+        val intent = Intent(context, DetailTvShow::class.java)
+        intent.putExtra(DetailTvShow.EXTRA_TVSHOW, tvShow.id)
+        requireContext().startActivity(intent)
     }
 
 }

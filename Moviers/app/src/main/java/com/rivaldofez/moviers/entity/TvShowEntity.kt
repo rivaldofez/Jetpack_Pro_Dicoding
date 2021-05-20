@@ -13,5 +13,6 @@ data class TvShowEntity (
         var rating: Float,
         var episode: Int,
         var studio: String,
-        var posterPath : String
+        var posterPath : String,
+        var backdropPath: String
 ): Parcelable
