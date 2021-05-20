@@ -18,4 +18,9 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
+    <style name="Theme.AppCompat.RatingBar">
+        <item name="colorControlNormal">@color/gainsboro</item>
+        <item name="colorControlActivated">@color/gold</item>
+    </style>
 </resources>

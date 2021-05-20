@@ -3,13 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     android:background="@color/primary_500">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/containter_item"
+        android:id="@+id/card_poster"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,7 +22,7 @@
         <ImageView
             android:id="@+id/img_poster"
             android:layout_width="match_parent"
-            android:layout_height="160dp"
+            android:layout_height="170dp"
             android:contentDescription="@string/movie_posters"
             android:src="@drawable/logo_moviers"
             android:scaleType="fitXY"/>
@@ -40,15 +41,18 @@
         android:textStyle="bold"
         android:ellipsize="end"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/containter_item"
+        app:layout_constraintTop_toBottomOf="@+id/card_poster"
         tools:text="Title" />
 
     <RatingBar
         android:id="@+id/rating_movie"
-        style="?android:attr/ratingBarStyleSmall"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:numStars="5"
+        android:rating="3.5"
+        android:stepSize="0.1"
+        android:theme="@style/Theme.AppCompat.RatingBar"
+        style="?android:attr/ratingBarStyleSmall"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_title" />
 

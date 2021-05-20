@@ -10,7 +10,7 @@ data class TvShowEntity (
         var overview: String,
         var date: String,
         var status: String,
-        var rating: Int,
+        var rating: Float,
         var episode: Int,
         var studio: String,
         var posterPath : String
