@@ -7,8 +7,8 @@ import com.rivaldofez.moviers.utils.DataDummy
 class DetailTvShowViewModel: ViewModel() {
     private lateinit var tvShowId: String
 
-    fun setCurrentTvShow(tvShowId: Int){
-        this.tvShowId = tvShowId.toString()
+    fun setCurrentTvShow(tvShowId: String){
+        this.tvShowId = tvShowId
     }
 
     fun getTvShow(): TvShowEntity {
@@ -16,7 +16,7 @@ class DetailTvShowViewModel: ViewModel() {
         val tvShows = DataDummy.generateDummyTvShow()
 
         for(iTvShow in tvShows){
-            if (tvShowId == iTvShow.id.toString()){
+            if (tvShowId == iTvShow.id){
                 tvShow = iTvShow
                 break
             }

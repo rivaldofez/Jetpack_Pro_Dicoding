@@ -5,7 +5,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class TvShowEntity (
-        var id: Int,
+        var id: String,
         var title: String,
         var overview: String,
         var date: String,
@@ -14,5 +14,6 @@ data class TvShowEntity (
         var episode: Int,
         var studio: String,
         var posterPath : String,
-        var backdropPath: String
+        var backdropPath: String,
+        var trailerUrl: String
 ): Parcelable

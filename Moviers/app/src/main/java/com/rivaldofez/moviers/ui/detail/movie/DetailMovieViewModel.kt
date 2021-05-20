@@ -8,8 +8,8 @@ import com.rivaldofez.moviers.utils.DataDummy
 class DetailMovieViewModel : ViewModel(){
     private lateinit var movieId: String
 
-    fun setCurrentMovie(movieId: Int){
-        this.movieId = movieId.toString()
+    fun setCurrentMovie(movieId: String){
+        this.movieId = movieId
     }
 
     fun getMovie(): MovieEntity {
@@ -17,7 +17,7 @@ class DetailMovieViewModel : ViewModel(){
         val movies = DataDummy.generateDummyMovies()
 
         for(iMovie in movies){
-            if (movieId == iMovie.id.toString()){
+            if (movieId == iMovie.id){
                 movie = iMovie
                 break
             }
