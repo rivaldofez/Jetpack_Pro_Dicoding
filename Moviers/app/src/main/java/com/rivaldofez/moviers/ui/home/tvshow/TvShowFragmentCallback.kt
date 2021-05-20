@@ -1,4 +1,4 @@
-package com.rivaldofez.moviers.ui.tvshow
+package com.rivaldofez.moviers.ui.home.tvshow
 
 import com.rivaldofez.moviers.entity.TvShowEntity
 

@@ -1,4 +1,4 @@
-package com.rivaldofez.moviers.ui.tvshow
+package com.rivaldofez.moviers.ui.home.tvshow
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

@@ -1,4 +1,4 @@
-package com.rivaldofez.moviers.ui.movie
+package com.rivaldofez.moviers.ui.home.movie
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,12 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.rivaldofez.moviers.databinding.FragmentMovieBinding
 import com.rivaldofez.moviers.entity.MovieEntity
-import com.rivaldofez.moviers.ui.tvshow.DetailTvShow
-import com.rivaldofez.moviers.utils.DataDummy
+import com.rivaldofez.moviers.ui.detail.movie.DetailMovie
 
 class MovieFragment : Fragment(), MovieFragmentCallback {
     private lateinit var fragmentMovieBinding: FragmentMovieBinding
@@ -24,18 +23,21 @@ class MovieFragment : Fragment(), MovieFragmentCallback {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val listMovies = DataDummy.generateDummyMovies()
-        val gridLayoutManager =  GridLayoutManager(context, 3)
-        val adapter = MovieAdapter(this)
-        adapter.setMovies(listMovies)
+        if(activity != null){
+            val viewModel = ViewModelProvider(this,ViewModelProvider.NewInstanceFactory())[MovieViewModel::class.java]
+            val movies = viewModel.getMovies()
 
-        fragmentMovieBinding.rvMovies.layoutManager = gridLayoutManager
-        fragmentMovieBinding.rvMovies.adapter = adapter
+            val movieAdapter = MovieAdapter(this)
+            movieAdapter.setMovies(movies)
 
+            with(fragmentMovieBinding.rvMovies){
+                layoutManager = GridLayoutManager(context, 3)
+                adapter = movieAdapter
+            }
+        }
     }
 
     override fun onMovieClick(movie: MovieEntity) {
-        Toast.makeText(context,"Click item ${movie.title}",Toast.LENGTH_SHORT).show()
         val intent = Intent(context, DetailMovie::class.java)
         intent.putExtra(DetailMovie.EXTRA_MOVIE, movie.id)
         requireContext().startActivity(intent)
