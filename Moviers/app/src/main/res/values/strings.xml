@@ -4,4 +4,10 @@
     <string name="movie_posters">Movie Posters</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="backdrop_image">Backdrop Image</string>
+    <string name="date_title">Tanggal Rilis :</string>
+    <string name="status_title">Status :</string>
+    <string name="eps_title">EPS</string>
+    <string name="studio_title">Studio :</string>
+    <string name="overview_title">Overview</string>
 </resources>

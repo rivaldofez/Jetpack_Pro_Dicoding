@@ -1,5 +1,6 @@
 package com.rivaldofez.moviers.ui.movie
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.rivaldofez.moviers.databinding.FragmentMovieBinding
 import com.rivaldofez.moviers.entity.MovieEntity
+import com.rivaldofez.moviers.ui.tvshow.DetailTvShow
 import com.rivaldofez.moviers.utils.DataDummy
 
 class MovieFragment : Fragment(), MovieFragmentCallback {
@@ -34,5 +36,7 @@ class MovieFragment : Fragment(), MovieFragmentCallback {
 
     override fun onMovieClick(movie: MovieEntity) {
         Toast.makeText(context,"Click item ${movie.title}",Toast.LENGTH_SHORT).show()
+        val intent = Intent(context, DetailTvShow::class.java)
+        requireContext().startActivity(intent)
     }
 }
