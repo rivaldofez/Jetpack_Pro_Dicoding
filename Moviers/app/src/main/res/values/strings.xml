@@ -7,8 +7,10 @@
     <string name="backdrop_image">Backdrop Image</string>
     <string name="date_title">Tanggal Rilis :</string>
     <string name="status_title">Status :</string>
-    <string name="eps_title">EPS</string>
+    <string name="eps_title">%1$s\nEPS</string>
     <string name="studio_title">Studio :</string>
     <string name="overview_title">Overview</string>
     <string name="trailer">Trailer</string>
+    <string name="detail_movie">Detail Movie</string>
+    <string name="detail_tvshow">Detail TV Show</string>
 </resources>

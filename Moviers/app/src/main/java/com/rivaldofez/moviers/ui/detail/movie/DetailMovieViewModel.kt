@@ -2,7 +2,6 @@ package com.rivaldofez.moviers.ui.detail.movie
 
 import androidx.lifecycle.ViewModel
 import com.rivaldofez.moviers.entity.MovieEntity
-import com.rivaldofez.moviers.entity.TvShowEntity
 import com.rivaldofez.moviers.utils.DataDummy
 
 class DetailMovieViewModel : ViewModel(){

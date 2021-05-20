@@ -1,16 +1,12 @@
 package com.rivaldofez.moviers.ui.trailer
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import android.webkit.WebChromeClient
-import android.webkit.WebView
 import android.webkit.WebViewClient
-import android.widget.Toast
 import com.rivaldofez.moviers.R
 import com.rivaldofez.moviers.databinding.ActivityTrailerBinding
-import com.rivaldofez.moviers.ui.detail.tvshow.DetailTvShow
-import java.util.*
 
 class TrailerActivity : AppCompatActivity() {
     companion object{
@@ -18,6 +14,7 @@ class TrailerActivity : AppCompatActivity() {
     }
     private lateinit var trailerBinding: ActivityTrailerBinding
 
+    @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         trailerBinding = ActivityTrailerBinding.inflate(layoutInflater)
@@ -37,7 +34,7 @@ class TrailerActivity : AppCompatActivity() {
     }
 
     private fun setActionBar(){
-        supportActionBar?.title = "Trailer"
+        supportActionBar?.title = getString(R.string.trailer)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 

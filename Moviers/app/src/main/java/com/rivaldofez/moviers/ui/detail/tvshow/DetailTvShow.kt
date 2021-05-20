@@ -1,12 +1,13 @@
 package com.rivaldofez.moviers.ui.detail.tvshow
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.rivaldofez.moviers.R
 import com.rivaldofez.moviers.databinding.ActivityDetailTvShowBinding
 import com.rivaldofez.moviers.entity.TvShowEntity
 import com.rivaldofez.moviers.ui.trailer.TrailerActivity
@@ -35,6 +36,7 @@ class DetailTvShow : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("StringFormatMatches")
     private fun setViewContent(tvShow: TvShowEntity){
         Glide.with(this).load(tvShow.posterPath).into(detailTvShowBinding.imgPoster)
         Glide.with(this).load(tvShow.backdropPath).into(detailTvShowBinding.imgBackdrop)
@@ -44,7 +46,8 @@ class DetailTvShow : AppCompatActivity() {
         detailTvShowBinding.ratingTv.rating = tvShow.rating
         detailTvShowBinding.tvStatus.text = tvShow.status
         detailTvShowBinding.tvStudio.text = tvShow.studio
-        detailTvShowBinding.tvEpisode.text = "${tvShow.episode}\nEPS"
+        detailTvShowBinding.tvEpisode.text = getString(R.string.eps_title,tvShow.episode.toString())
+
 
         detailTvShowBinding.btnTrailer.setOnClickListener{
             val intent = Intent(this, TrailerActivity::class.java)
