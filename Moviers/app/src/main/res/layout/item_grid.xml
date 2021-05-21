@@ -24,8 +24,8 @@
             android:layout_width="match_parent"
             android:layout_height="170dp"
             android:contentDescription="@string/movie_posters"
-            android:src="@drawable/logo_moviers"
-            android:scaleType="fitXY"/>
+            android:scaleType="fitXY"
+            tools:src="@color/huegreen"/>
 
     </androidx.cardview.widget.CardView>
 
