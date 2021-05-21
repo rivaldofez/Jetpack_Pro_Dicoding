@@ -1,10 +1,10 @@
 package com.rivaldofez.moviers.ui.trailer
 
 import android.annotation.SuppressLint
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.webkit.WebViewClient
+import androidx.appcompat.app.AppCompatActivity
 import com.rivaldofez.moviers.R
 import com.rivaldofez.moviers.databinding.ActivityTrailerBinding
 

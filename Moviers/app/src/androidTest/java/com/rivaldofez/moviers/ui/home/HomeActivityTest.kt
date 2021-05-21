@@ -77,7 +77,7 @@ class HomeActivityTest{
         onView(withId(R.id.tv_studio)).check(matches(withText(dummyTvShows[0].studio)))
         onView(withId(R.id.tv_date)).check(matches(withText(dummyTvShows[0].date)))
         onView(withId(R.id.tv_status)).check(matches(withText(dummyTvShows[0].status)))
-        onView(withId(R.id.tv_episode)).check(matches(withText("${dummyTvShows[0].episode.toString()}\nEPS")))
+        onView(withId(R.id.tv_episode)).check(matches(withText("${dummyTvShows[0].episode}\nEPS")))
     }
 
     @Test

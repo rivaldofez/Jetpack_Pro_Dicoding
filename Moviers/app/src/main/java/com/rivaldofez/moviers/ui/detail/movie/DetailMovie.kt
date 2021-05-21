@@ -1,11 +1,12 @@
 package com.rivaldofez.moviers.ui.detail.movie
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.rivaldofez.moviers.R
 import com.rivaldofez.moviers.databinding.ActivityDetailMovieBinding
 import com.rivaldofez.moviers.entity.MovieEntity
 import com.rivaldofez.moviers.ui.trailer.TrailerActivity
@@ -51,7 +52,7 @@ class DetailMovie : AppCompatActivity() {
     }
 
     private fun setActionBar(){
-        supportActionBar?.title = "Detail Movie"
+        supportActionBar?.title = getString(R.string.detail_movie)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 

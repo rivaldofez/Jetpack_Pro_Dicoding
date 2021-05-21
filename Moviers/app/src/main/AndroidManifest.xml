@@ -14,10 +14,11 @@
         <activity android:name=".ui.trailer.TrailerActivity"></activity>
         <activity android:name=".ui.detail.movie.DetailMovie" />
         <activity android:name=".ui.detail.tvshow.DetailTvShow" />
-        <activity android:name=".ui.home.HomeActivity" />
+        <activity android:name=".ui.home.HomeActivity"
+            android:theme="@style/Theme.Moviers.NoToolbar"/>
         <activity
             android:name=".ui.splash.SplashActivity"
-            android:theme="@style/Theme.Moviers.Splash">
+            android:theme="@style/Theme.Moviers.NoToolbar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

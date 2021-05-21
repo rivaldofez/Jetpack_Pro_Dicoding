@@ -14,8 +14,19 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Theme.Moviers.Splash">
+    <style name="Theme.Moviers.NoToolbar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.AppCompat.RatingBar">
+        <item name="colorControlNormal">@color/gainsboro</item>
+        <item name="colorControlActivated">@color/gold</item>
+    </style>
+
+    <style name="RoundImageView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">4dp</item>
+        <item name="color">@color/white</item>
     </style>
 </resources>

@@ -2,9 +2,9 @@ package com.rivaldofez.moviers.ui.detail.tvshow
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.rivaldofez.moviers.R
@@ -23,6 +23,7 @@ class DetailTvShow : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         detailTvShowBinding = ActivityDetailTvShowBinding.inflate(layoutInflater)
         setContentView(detailTvShowBinding.root)
+        setActionBar()
 
         val viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[DetailTvShowViewModel::class.java]
 
@@ -60,5 +61,10 @@ class DetailTvShow : AppCompatActivity() {
         if(item.itemId == android.R.id.home)
             finish()
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun setActionBar(){
+        supportActionBar?.title = getString(R.string.detail_tvshow)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 }

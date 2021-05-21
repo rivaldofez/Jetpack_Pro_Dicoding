@@ -1,11 +1,10 @@
 package com.rivaldofez.moviers.ui.detail.tvshow
 
-import com.rivaldofez.moviers.ui.detail.movie.DetailMovieViewModel
 import com.rivaldofez.moviers.utils.DataDummy
-import org.junit.Test
-
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Before
+import org.junit.Test
 
 class DetailTvShowViewModelTest {
     private lateinit var detailTvShowViewModel: DetailTvShowViewModel
