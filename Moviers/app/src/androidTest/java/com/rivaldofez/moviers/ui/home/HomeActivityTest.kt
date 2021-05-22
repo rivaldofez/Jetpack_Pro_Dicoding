@@ -1,5 +1,6 @@
 package com.rivaldofez.moviers.ui.home
 
+import android.widget.RatingBar
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions
@@ -31,10 +32,10 @@ class HomeActivityTest{
         onView(withId(R.id.rv_movies)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
         onView(withId(R.id.btn_trailer)).perform(ViewActions.scrollTo())
 
-        val MovieAttribute = listOf(R.id.tv_studio,R.id.tv_overview,R.id.tv_date,R.id.tv_title,
+        val movieAttribute = listOf(R.id.tv_studio,R.id.tv_overview,R.id.tv_date,R.id.tv_title,
             R.id.img_poster, R.id.img_backdrop, R.id.rating_movie, R.id.btn_trailer)
 
-        for(idAttr in MovieAttribute){
+        for(idAttr in movieAttribute){
             onView(withId(idAttr)).check(matches(isDisplayed()))
         }
 
@@ -42,6 +43,7 @@ class HomeActivityTest{
         onView(withId(R.id.tv_title)).check(matches(withText(dummyMovies[0].title)))
         onView(withId(R.id.tv_studio)).check(matches(withText(dummyMovies[0].studio)))
         onView(withId(R.id.tv_date)).check(matches(withText(dummyMovies[0].date)))
+        onView(withId(R.id.rating_movie)).check(matches(isAssignableFrom(RatingBar::class.java)))
     }
 
     @Test
@@ -65,11 +67,11 @@ class HomeActivityTest{
         onView(withId(R.id.rv_tvshow)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
         onView(withId(R.id.btn_trailer)).perform(ViewActions.scrollTo())
 
-        val TvShowAttribute = listOf(R.id.tv_studio,R.id.tv_overview,R.id.tv_date,R.id.tv_title,
-            R.id.tv_status, R.id.tv_episode , R.id.img_poster, R.id.img_backdrop, R.id.rating_tv,
+        val tvShowAttribute = listOf(R.id.tv_studio,R.id.tv_overview,R.id.tv_date,R.id.tv_title,
+            R.id.tv_status, R.id.tv_episode , R.id.img_poster, R.id.img_backdrop, R.id.rating_tvshow,
             R.id.btn_trailer)
 
-        for(idAttr in TvShowAttribute){
+        for(idAttr in tvShowAttribute){
             onView(withId(idAttr)).check(matches(isDisplayed()))
         }
         onView(withId(R.id.tv_overview)).check(matches(withText(dummyTvShows[0].overview)))
@@ -78,6 +80,7 @@ class HomeActivityTest{
         onView(withId(R.id.tv_date)).check(matches(withText(dummyTvShows[0].date)))
         onView(withId(R.id.tv_status)).check(matches(withText(dummyTvShows[0].status)))
         onView(withId(R.id.tv_episode)).check(matches(withText("${dummyTvShows[0].episode}\nEPS")))
+        onView(withId(R.id.rating_tvshow)).check(matches(isAssignableFrom(RatingBar::class.java)))
     }
 
     @Test

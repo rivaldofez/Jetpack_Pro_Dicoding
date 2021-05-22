@@ -1,10 +1,11 @@
 package com.rivaldofez.academy.ui.bookmark
 
 import androidx.lifecycle.ViewModel
-import com.rivaldofez.academy.data.CourseEntity
-import com.rivaldofez.academy.utils.DataDummy
+import com.rivaldofez.academy.data.source.local.entity.CourseEntity
+import com.rivaldofez.academy.data.source.AcademyRepository
 
-class BookmarkViewModel : ViewModel() {
+class BookmarkViewModel(private val academyRepository: AcademyRepository) : ViewModel() {
 
-    fun getBookmarks(): List<CourseEntity> = DataDummy.generateDummyCourses()
+    fun getBookmarks(): List<CourseEntity> = academyRepository.getBookmarkedCourses()
+
 }

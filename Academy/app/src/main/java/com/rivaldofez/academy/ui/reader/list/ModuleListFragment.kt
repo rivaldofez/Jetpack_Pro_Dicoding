@@ -9,13 +9,12 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.rivaldofez.academy.R
-import com.rivaldofez.academy.data.ModuleEntity
+import com.rivaldofez.academy.data.source.local.entity.ModuleEntity
 import com.rivaldofez.academy.databinding.FragmentModuleListBinding
 import com.rivaldofez.academy.ui.reader.CourseReaderActivity
 import com.rivaldofez.academy.ui.reader.CourseReaderCallback
 import com.rivaldofez.academy.ui.reader.CourseReaderViewModel
-import com.rivaldofez.academy.utils.DataDummy
+import com.rivaldofez.academy.viewmodel.ViewModelFactory
 
 class ModuleListFragment : Fragment(), MyAdapterClickListener {
 
@@ -40,7 +39,8 @@ class ModuleListFragment : Fragment(), MyAdapterClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory())[CourseReaderViewModel::class.java]
+        val factory = ViewModelFactory.getInstance(requireActivity())
+        viewModel = ViewModelProvider(requireActivity(), factory)[CourseReaderViewModel::class.java]
         adapter = ModuleListAdapter(this)
         populateRecyclerView(viewModel.getModules())
     }

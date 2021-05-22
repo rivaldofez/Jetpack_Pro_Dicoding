@@ -44,7 +44,7 @@ class DetailTvShow : AppCompatActivity() {
         detailTvShowBinding.tvDate.text = tvShow.date
         detailTvShowBinding.tvTitle.text = tvShow.title
         detailTvShowBinding.tvOverview.text = tvShow.overview
-        detailTvShowBinding.ratingTv.rating = tvShow.rating
+        detailTvShowBinding.ratingTvshow.rating = tvShow.rating
         detailTvShowBinding.tvStatus.text = tvShow.status
         detailTvShowBinding.tvStudio.text = tvShow.studio
         detailTvShowBinding.tvEpisode.text = getString(R.string.eps_title,tvShow.episode.toString())

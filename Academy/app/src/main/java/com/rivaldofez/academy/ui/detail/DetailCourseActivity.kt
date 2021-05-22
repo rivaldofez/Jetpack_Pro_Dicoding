@@ -2,8 +2,6 @@ package com.rivaldofez.academy.ui.detail
 
 import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -12,11 +10,11 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.rivaldofez.academy.R
-import com.rivaldofez.academy.data.CourseEntity
+import com.rivaldofez.academy.data.source.local.entity.CourseEntity
 import com.rivaldofez.academy.databinding.ActivityDetailCourseBinding
 import com.rivaldofez.academy.databinding.ContentDetailCourseBinding
 import com.rivaldofez.academy.ui.reader.CourseReaderActivity
-import com.rivaldofez.academy.utils.DataDummy
+import com.rivaldofez.academy.viewmodel.ViewModelFactory
 
 class DetailCourseActivity : AppCompatActivity() {
 
@@ -39,7 +37,8 @@ class DetailCourseActivity : AppCompatActivity() {
 
         val adapter = DetailCourseAdapter()
 
-        val viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[DetailCourseViewModel::class.java]
+        val factory = ViewModelFactory.getInstance(this)
+        val viewModel = ViewModelProvider(this, factory)[DetailCourseViewModel::class.java]
 
         val extras = intent.extras
         if (extras != null) {

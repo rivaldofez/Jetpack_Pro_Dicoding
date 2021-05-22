@@ -1,4 +1,4 @@
-package com.rivaldofez.academy.data
+package com.rivaldofez.academy.data.source.local.entity
 
 data class CourseEntity(
     var courseId: String,
