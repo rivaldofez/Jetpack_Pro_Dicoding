@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.rivaldofez.moviers.databinding.ItemGridBinding
-import com.rivaldofez.moviers.entity.MovieEntity
+import com.rivaldofez.moviers.data.source.local.entity.MovieEntity
 
 class MovieAdapter(private val callback: MovieFragmentCallback): RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
     private val listMovies = ArrayList<MovieEntity>()

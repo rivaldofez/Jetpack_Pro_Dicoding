@@ -1,4 +1,4 @@
-package com.rivaldofez.moviers.entity
+package com.rivaldofez.moviers.data.source.local.entity
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

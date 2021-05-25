@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.rivaldofez.moviers.databinding.FragmentMovieBinding
-import com.rivaldofez.moviers.entity.MovieEntity
+import com.rivaldofez.moviers.data.source.local.entity.MovieEntity
 import com.rivaldofez.moviers.ui.detail.movie.DetailMovie
 
 class MovieFragment : Fragment(), MovieFragmentCallback {

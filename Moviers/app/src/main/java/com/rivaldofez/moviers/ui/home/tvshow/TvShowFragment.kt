@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.rivaldofez.moviers.databinding.FragmentTvShowBinding
-import com.rivaldofez.moviers.entity.TvShowEntity
+import com.rivaldofez.moviers.data.source.local.entity.TvShowEntity
 import com.rivaldofez.moviers.ui.detail.tvshow.DetailTvShow
 
 class TvShowFragment : Fragment(), TvShowFragmentCallback {

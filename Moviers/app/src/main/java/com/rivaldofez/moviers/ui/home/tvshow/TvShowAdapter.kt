@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.rivaldofez.moviers.databinding.ItemGridBinding
-import com.rivaldofez.moviers.entity.TvShowEntity
+import com.rivaldofez.moviers.data.source.local.entity.TvShowEntity
 
 class TvShowAdapter(private val callback: TvShowFragmentCallback): RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
     private val listTvShows = ArrayList<TvShowEntity>()

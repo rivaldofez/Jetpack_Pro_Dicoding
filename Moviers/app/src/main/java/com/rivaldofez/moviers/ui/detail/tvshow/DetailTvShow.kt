@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.rivaldofez.moviers.R
 import com.rivaldofez.moviers.databinding.ActivityDetailTvShowBinding
-import com.rivaldofez.moviers.entity.TvShowEntity
+import com.rivaldofez.moviers.data.source.local.entity.TvShowEntity
 import com.rivaldofez.moviers.ui.trailer.TrailerActivity
 
 class DetailTvShow : AppCompatActivity() {

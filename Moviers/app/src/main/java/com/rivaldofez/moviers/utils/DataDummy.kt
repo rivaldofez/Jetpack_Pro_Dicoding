@@ -1,7 +1,7 @@
 package com.rivaldofez.moviers.utils
 
-import com.rivaldofez.moviers.entity.MovieEntity
-import com.rivaldofez.moviers.entity.TvShowEntity
+import com.rivaldofez.moviers.data.source.local.entity.MovieEntity
+import com.rivaldofez.moviers.data.source.local.entity.TvShowEntity
 
 object DataDummy {
     fun generateDummyMovies(): List<MovieEntity> {
