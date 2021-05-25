@@ -1,8 +1,6 @@
 package com.rivaldofez.moviers.data.source.remote.response.movie
 
 import com.google.gson.annotations.SerializedName
-import com.rivaldofez.moviers.data.source.remote.response.tvshow.GenresItem
-import com.rivaldofez.moviers.data.source.remote.response.tvshow.SpokenLanguagesItem
 
 data class MovieEntityResponse(
 
@@ -80,4 +78,64 @@ data class MovieEntityResponse(
 
 	@field:SerializedName("status")
 	val status: String
+)
+
+data class ProductionCountriesItem(
+
+	@field:SerializedName("iso_3166_1")
+	val iso31661: String,
+
+	@field:SerializedName("name")
+	val name: String
+)
+
+data class SpokenLanguagesItem(
+
+	@field:SerializedName("name")
+	val name: String,
+
+	@field:SerializedName("iso_639_1")
+	val iso6391: String,
+
+	@field:SerializedName("english_name")
+	val englishName: String
+)
+
+data class BelongsToCollection(
+
+	@field:SerializedName("backdrop_path")
+	val backdropPath: String,
+
+	@field:SerializedName("name")
+	val name: String,
+
+	@field:SerializedName("id")
+	val id: Int,
+
+	@field:SerializedName("poster_path")
+	val posterPath: String
+)
+
+data class ProductionCompaniesItem(
+
+	@field:SerializedName("logo_path")
+	val logoPath: String,
+
+	@field:SerializedName("name")
+	val name: String,
+
+	@field:SerializedName("id")
+	val id: Int,
+
+	@field:SerializedName("origin_country")
+	val originCountry: String
+)
+
+data class GenresItem(
+
+	@field:SerializedName("name")
+	val name: String,
+
+	@field:SerializedName("id")
+	val id: Int
 )
