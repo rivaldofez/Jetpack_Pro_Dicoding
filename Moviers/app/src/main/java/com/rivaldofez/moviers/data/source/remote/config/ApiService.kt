@@ -9,27 +9,27 @@ import retrofit2.http.*
 
 interface ApiService {
 
-    @GET("movie/popular?api_key={token}&page={page}")
+    @GET("movie/popular?api_key={key}&page={page}")
     fun getPopularMovies(
-        @Path("token") token: String,
+        @Path("key") token: String,
         @Path("page") page: String
     ): Call<MovieListResponse>
 
-    @GET("tv/popular?api_key={token}&page={page}")
-    fun getTvShow(
-        @Path("token") token: String,
+    @GET("tv/popular?api_key={key}&page={page}")
+    fun getPopularTvShow(
+        @Path("key") token: String,
         @Path("page") page: String
     ): Call<TvShowListResponse>
 
-    @GET("movie/{id}?api_key={token}")
+    @GET("movie/{id}?api_key={key}")
     fun getMovieById(
-        @Path("token") token: String,
+        @Path("key") token: String,
         @Path("id") id: String
     ): Call<MovieEntityResponse>
 
-    @GET("tv/{id}?api_key={token}")
+    @GET("tv/{id}?api_key={key}")
     fun getTvShowById(
-        @Path("token") token: String,
+        @Path("key") token: String,
         @Path("id") id: String
     ): Call<TvShowEntityResponse>
 
