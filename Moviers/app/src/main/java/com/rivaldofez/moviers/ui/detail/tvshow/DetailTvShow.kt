@@ -3,6 +3,7 @@ package com.rivaldofez.moviers.ui.detail.tvshow
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
@@ -37,6 +38,13 @@ class DetailTvShow : AppCompatActivity() {
                 viewModel.setCurrentTvShow(tvShowId)
                 viewModel.getDetailTvShow().observe(this, {tvshow->
                     setViewContent(tvshow)
+                })
+                viewModel.getLoadingStatus().observe(this, {status ->
+                    if(status){
+                        detailTvShowBinding.progressBar.visibility = View.VISIBLE
+                    }else{
+                        detailTvShowBinding.progressBar.visibility = View.GONE
+                    }
                 })
             }
         }

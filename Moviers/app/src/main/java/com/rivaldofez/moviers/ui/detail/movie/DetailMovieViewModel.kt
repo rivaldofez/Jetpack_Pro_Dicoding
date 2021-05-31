@@ -13,4 +13,6 @@ class DetailMovieViewModel(private val movieRepository: MovieRepository) : ViewM
     }
 
     fun getDetailMovie(): LiveData<MovieEntityResponse> = movieRepository.getDetailMovie(movieId)
+
+    fun getLoadingStatus(): LiveData<Boolean> = movieRepository.isLoading
 }

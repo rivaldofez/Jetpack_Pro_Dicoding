@@ -13,4 +13,6 @@ class DetailTvShowViewModel(private val tvShowRepository: TvShowRepository): Vie
     }
 
     fun getDetailTvShow() : LiveData<TvShowEntityResponse> = tvShowRepository.getDetailTvShow(tvShowId)
+
+    fun getLoadingStatus(): LiveData<Boolean> = tvShowRepository.isLoading
 }

@@ -36,6 +36,14 @@ class TvShowFragment : Fragment(), TvShowFragmentCallback {
                 tvShowAdapter.setTvShows(tvShows)
             })
 
+            viewModel.getLoadingStatus().observe(viewLifecycleOwner,{status ->
+                if(status){
+                    fragmentTvShowBinding.progressBar.visibility = View.VISIBLE
+                }else{
+                    fragmentTvShowBinding.progressBar.visibility = View.GONE
+                }
+            })
+
             with(fragmentTvShowBinding.rvTvshow){
                 layoutManager = GridLayoutManager(context, 3)
                 adapter = tvShowAdapter

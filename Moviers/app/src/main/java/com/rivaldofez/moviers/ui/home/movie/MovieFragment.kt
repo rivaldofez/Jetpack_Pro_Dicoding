@@ -34,6 +34,14 @@ class MovieFragment : Fragment(), MovieFragmentCallback {
                 movieAdapter.setMovies(movies)
             })
 
+            viewModel.getLoadingStatus().observe(viewLifecycleOwner,{status ->
+                if(status){
+                    fragmentMovieBinding.progressBar.visibility = View.VISIBLE
+                }else{
+                    fragmentMovieBinding.progressBar.visibility = View.GONE
+                }
+            })
+
             with(fragmentMovieBinding.rvMovies){
                 layoutManager = GridLayoutManager(context, 3)
                 adapter = movieAdapter

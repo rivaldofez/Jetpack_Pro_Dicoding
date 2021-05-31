@@ -7,6 +7,8 @@ import com.rivaldofez.moviers.data.source.remote.response.tvshow.TvShowEntityRes
 import com.rivaldofez.moviers.data.source.remote.response.tvshow.TvShowItem
 
 class TvShowRepository(private val remoteDataSource: RemoteDataSource): TvShowDataSource {
+    val isLoading = MutableLiveData<Boolean>()
+
     companion object{
         @Volatile
         private var instance: TvShowRepository? = null
@@ -17,9 +19,11 @@ class TvShowRepository(private val remoteDataSource: RemoteDataSource): TvShowDa
     }
 
     override fun getPopularTvShows(): LiveData<List<TvShowItem>> {
+        isLoading.value = true
         val tvshowResults = MutableLiveData<List<TvShowItem>>()
         remoteDataSource.getPopularTvShow(object : RemoteDataSource.LoadPopularTvShowCallback{
             override fun onPopularTvShowsLoaded(tvshowResponse: List<TvShowItem>) {
+                isLoading.value = false
                 tvshowResults.postValue(tvshowResponse)
             }
         })
@@ -27,9 +31,11 @@ class TvShowRepository(private val remoteDataSource: RemoteDataSource): TvShowDa
     }
 
     override fun getDetailTvShow(tvShowId: String): LiveData<TvShowEntityResponse> {
+        isLoading.value = true
         val detailTvShowResult = MutableLiveData<TvShowEntityResponse>()
         remoteDataSource.getDetailTvShow(object : RemoteDataSource.LoadDetailTvShowCallback{
             override fun onTvShowLoaded(tvShowEntityResponse: TvShowEntityResponse) {
+                isLoading.value = false
                 detailTvShowResult.postValue(tvShowEntityResponse)
             }
         }, tvShowId)

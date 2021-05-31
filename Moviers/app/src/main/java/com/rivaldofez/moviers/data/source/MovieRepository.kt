@@ -8,6 +8,8 @@ import com.rivaldofez.moviers.data.source.remote.response.movie.MovieItem
 
 class MovieRepository(private val remoteDataSource: RemoteDataSource): MovieDataSource {
 
+    val isLoading = MutableLiveData<Boolean>()
+
     companion object{
         @Volatile
         private var instance: MovieRepository? = null
@@ -18,9 +20,11 @@ class MovieRepository(private val remoteDataSource: RemoteDataSource): MovieData
     }
 
     override fun getPopularMovies(): LiveData<List<MovieItem>> {
+        isLoading.value = true
         val movieResults = MutableLiveData<List<MovieItem>>()
         remoteDataSource.getPopularMovies(object : RemoteDataSource.LoadPopularMoviesCallback{
             override fun onPopularMoviesLoaded(moviesResponses: List<MovieItem>) {
+                isLoading.value = false
                 movieResults.postValue(moviesResponses)
             }
         })
@@ -28,9 +32,11 @@ class MovieRepository(private val remoteDataSource: RemoteDataSource): MovieData
     }
 
     override fun getDetailMovie(movieId: String): LiveData<MovieEntityResponse> {
+        isLoading.value = true
         val detailMovieResult = MutableLiveData<MovieEntityResponse>()
         remoteDataSource.getDetailMovie(object : RemoteDataSource.LoadDetailMovieCallback{
             override fun onMovieLoaded(movieEntityResponse: MovieEntityResponse) {
+                isLoading.value = false
                 detailMovieResult.postValue(movieEntityResponse)
             }
         }, movieId)

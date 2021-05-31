@@ -3,6 +3,7 @@ package com.rivaldofez.moviers.ui.detail.movie
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
@@ -38,6 +39,14 @@ class DetailMovie : AppCompatActivity() {
                 viewModel.setCurrentMovie(movieId)
                 viewModel.getDetailMovie().observe(this, { movie ->
                     setContentView(movie)
+                })
+
+                viewModel.getLoadingStatus().observe(this, {status ->
+                    if(status){
+                        detailMovieBinding.progressBar.visibility = View.VISIBLE
+                    }else{
+                        detailMovieBinding.progressBar.visibility = View.GONE
+                    }
                 })
             }
         }
