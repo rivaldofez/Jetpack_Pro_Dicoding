@@ -25,7 +25,7 @@ class MovieFragment : Fragment(), MovieFragmentCallback {
         super.onViewCreated(view, savedInstanceState)
 
         if(activity != null){
-            val factory = ViewModelFactoryMovie.getInstance(requireActivity())
+            val factory = ViewModelFactoryMovie.getInstance()
             val viewModel = ViewModelProvider(this,factory)[MovieViewModel::class.java]
 
             val movieAdapter = MovieAdapter(this)

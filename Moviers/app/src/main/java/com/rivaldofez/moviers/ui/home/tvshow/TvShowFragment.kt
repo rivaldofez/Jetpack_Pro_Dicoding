@@ -28,7 +28,7 @@ class TvShowFragment : Fragment(), TvShowFragmentCallback {
         super.onViewCreated(view, savedInstanceState)
 
         if(activity != null){
-            val factory = ViewModelFactoryTvShow.getInstance(requireActivity())
+            val factory = ViewModelFactoryTvShow.getInstance()
             val viewModel = ViewModelProvider(this, factory)[TvShowViewModel::class.java]
 
             val tvShowAdapter = TvShowAdapter(this)

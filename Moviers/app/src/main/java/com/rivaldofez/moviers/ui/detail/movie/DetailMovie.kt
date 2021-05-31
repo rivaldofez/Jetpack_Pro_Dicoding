@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide
 import com.rivaldofez.moviers.R
 import com.rivaldofez.moviers.databinding.ActivityDetailMovieBinding
 import com.rivaldofez.moviers.data.source.remote.response.movie.MovieEntityResponse
-import com.rivaldofez.moviers.ui.trailer.TrailerActivity
+import com.rivaldofez.moviers.ui.webview.WebViewActivity
 import com.rivaldofez.moviers.utils.formatCurrency
 import com.rivaldofez.moviers.utils.formatDate
 import com.rivaldofez.moviers.utils.formatRuntime
@@ -28,7 +28,7 @@ class DetailMovie : AppCompatActivity() {
         setContentView(detailMovieBinding.root)
         setActionBar()
 
-        val factory = ViewModelFactoryMovie.getInstance(this)
+        val factory = ViewModelFactoryMovie.getInstance()
         val viewModel = ViewModelProvider(this, factory)[DetailMovieViewModel::class.java]
 
         val bundle = intent.extras
@@ -57,8 +57,8 @@ class DetailMovie : AppCompatActivity() {
         detailMovieBinding.tvBudget.text = formatCurrency(movie.budget)
         detailMovieBinding.tvRevenue.text = formatCurrency(movie.revenue)
         detailMovieBinding.btnTrailer.setOnClickListener {
-            val intent = Intent(this, TrailerActivity::class.java)
-            intent.putExtra(TrailerActivity.EXTRA_TRAILER, "google.com")
+            val intent = Intent(this, WebViewActivity::class.java)
+            intent.putExtra(WebViewActivity.EXTRA_LINKS, movie.homepage)
             startActivity(intent)
         }
 

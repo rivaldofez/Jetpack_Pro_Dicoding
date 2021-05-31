@@ -1,4 +1,4 @@
-package com.rivaldofez.moviers.ui.trailer
+package com.rivaldofez.moviers.ui.webview
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -6,35 +6,35 @@ import android.view.MenuItem
 import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
 import com.rivaldofez.moviers.R
-import com.rivaldofez.moviers.databinding.ActivityTrailerBinding
+import com.rivaldofez.moviers.databinding.ActivityWebViewBinding
 
-class TrailerActivity : AppCompatActivity() {
+class WebViewActivity : AppCompatActivity() {
     companion object{
-        const val EXTRA_TRAILER = "extra_trailer"
+        const val EXTRA_LINKS = "extra_link"
     }
-    private lateinit var trailerBinding: ActivityTrailerBinding
+    private lateinit var webviewBinding: ActivityWebViewBinding
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        trailerBinding = ActivityTrailerBinding.inflate(layoutInflater)
-        setContentView(trailerBinding.root)
+        webviewBinding = ActivityWebViewBinding.inflate(layoutInflater)
+        setContentView(webviewBinding.root)
         setActionBar()
 
-        trailerBinding.webTrailer.settings.javaScriptEnabled = true
+        webviewBinding.webTrailer.settings.javaScriptEnabled = true
 
-        trailerBinding.webTrailer.webViewClient = WebViewClient()
+        webviewBinding.webTrailer.webViewClient = WebViewClient()
 
         val bundle = intent.extras
         if(bundle != null){
-            val trailerUrl = bundle.getString(EXTRA_TRAILER)
+            val trailerUrl = bundle.getString(EXTRA_LINKS)
             if(trailerUrl != null)
-                trailerBinding.webTrailer.loadUrl(trailerUrl)
+                webviewBinding.webTrailer.loadUrl(trailerUrl)
         }
     }
 
     private fun setActionBar(){
-        supportActionBar?.title = getString(R.string.trailer)
+        supportActionBar?.title = getString(R.string.home_page)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 

@@ -1,6 +1,5 @@
 package com.rivaldofez.moviers.viewmodel
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.rivaldofez.moviers.data.source.MovieRepository
@@ -12,7 +11,7 @@ class ViewModelFactoryMovie private constructor(private val movieRepository: Mov
     companion object {
         private var instance: ViewModelFactoryMovie? = null
 
-        fun getInstance(context: Context): ViewModelFactoryMovie =
+        fun getInstance(): ViewModelFactoryMovie =
                 instance ?: synchronized(this){
                     instance?: ViewModelFactoryMovie(Injection.provideMovieRepository()).apply {
                         instance = this
@@ -20,13 +19,14 @@ class ViewModelFactoryMovie private constructor(private val movieRepository: Mov
                 }
     }
 
+    @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        when {
+        return when {
             modelClass.isAssignableFrom(MovieViewModel::class.java) -> {
-                return MovieViewModel(movieRepository) as T
+                MovieViewModel(movieRepository) as T
             }
             modelClass.isAssignableFrom(DetailMovieViewModel::class.java) -> {
-                return DetailMovieViewModel(movieRepository) as T
+                DetailMovieViewModel(movieRepository) as T
             }
             else -> throw Throwable("Unknown View Model" + modelClass.name)
         }

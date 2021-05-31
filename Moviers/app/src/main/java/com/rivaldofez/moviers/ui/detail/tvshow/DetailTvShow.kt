@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide
 import com.rivaldofez.moviers.R
 import com.rivaldofez.moviers.databinding.ActivityDetailTvShowBinding
 import com.rivaldofez.moviers.data.source.remote.response.tvshow.TvShowEntityResponse
-import com.rivaldofez.moviers.ui.trailer.TrailerActivity
+import com.rivaldofez.moviers.ui.webview.WebViewActivity
 import com.rivaldofez.moviers.utils.formatDate
 import com.rivaldofez.moviers.utils.generateButtonTextView
 import com.rivaldofez.moviers.viewmodel.ViewModelFactoryTvShow
@@ -27,7 +27,7 @@ class DetailTvShow : AppCompatActivity() {
         setContentView(detailTvShowBinding.root)
         setActionBar()
 
-        val factory = ViewModelFactoryTvShow.getInstance(this)
+        val factory = ViewModelFactoryTvShow.getInstance()
         val viewModel = ViewModelProvider(this, factory)[DetailTvShowViewModel::class.java]
 
         val bundle = intent.extras
@@ -53,12 +53,12 @@ class DetailTvShow : AppCompatActivity() {
         detailTvShowBinding.tvStatus.text = tvShow.status
         detailTvShowBinding.tvEpisode.text = tvShow.numberOfEpisodes.toString()
         detailTvShowBinding.tvSeason.text = tvShow.numberOfSeasons.toString()
-        detailTvShowBinding.tvLatestEpisode.text = "Run Episode " + tvShow.lastEpisodeToAir.episodeNumber.toString()
+        detailTvShowBinding.tvLatestEpisode.text = getString(R.string.episode_run, tvShow.episodeRunTime.toString())
         detailTvShowBinding.chartPopularity.setProgress(tvShow.voteAverage * 10F, true)
 
         detailTvShowBinding.btnTrailer.setOnClickListener{
-            val intent = Intent(this, TrailerActivity::class.java)
-            intent.putExtra(TrailerActivity.EXTRA_TRAILER, "google.com")
+            val intent = Intent(this, WebViewActivity::class.java)
+            intent.putExtra(WebViewActivity.EXTRA_LINKS, tvShow.homepage)
             startActivity(intent)
         }
 
