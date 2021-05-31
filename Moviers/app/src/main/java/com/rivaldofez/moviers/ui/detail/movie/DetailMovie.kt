@@ -8,8 +8,13 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.rivaldofez.moviers.R
 import com.rivaldofez.moviers.databinding.ActivityDetailMovieBinding
-import com.rivaldofez.moviers.data.source.local.entity.MovieEntity
+import com.rivaldofez.moviers.data.source.remote.response.movie.MovieEntityResponse
 import com.rivaldofez.moviers.ui.trailer.TrailerActivity
+import com.rivaldofez.moviers.utils.formatCurrency
+import com.rivaldofez.moviers.utils.formatDate
+import com.rivaldofez.moviers.utils.formatRuntime
+import com.rivaldofez.moviers.utils.generateButtonTextView
+import com.rivaldofez.moviers.viewmodel.ViewModelFactoryMovie
 
 class DetailMovie : AppCompatActivity() {
     companion object{
@@ -23,33 +28,49 @@ class DetailMovie : AppCompatActivity() {
         setContentView(detailMovieBinding.root)
         setActionBar()
 
-        val viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[DetailMovieViewModel::class.java]
+        val factory = ViewModelFactoryMovie.getInstance(this)
+        val viewModel = ViewModelProvider(this, factory)[DetailMovieViewModel::class.java]
 
         val bundle = intent.extras
         if(bundle != null){
             val movieId = bundle.getString(EXTRA_MOVIE)
             if(movieId != null){
                 viewModel.setCurrentMovie(movieId)
-                setContentView(viewModel.getMovie())
+                viewModel.getDetailMovie().observe(this, { movie ->
+                    setContentView(movie)
+                })
             }
         }
     }
 
-    private fun setContentView(movie: MovieEntity){
-        Glide.with(this).load(movie.posterPath).into(detailMovieBinding.imgPoster)
-        Glide.with(this).load(movie.backdropPath).into(detailMovieBinding.imgBackdrop)
-        detailMovieBinding.tvDate.text = movie.date
+    private fun setContentView(movie: MovieEntityResponse){
+        Glide.with(this).load("https://image.tmdb.org/t/p/w500"+movie.posterPath).into(detailMovieBinding.imgPoster)
+        Glide.with(this).load("https://image.tmdb.org/t/p/w500"+movie.backdropPath).into(detailMovieBinding.imgBackdrop)
+        detailMovieBinding.tvDate.text = formatDate(movie.releaseDate)
         detailMovieBinding.tvTitle.text = movie.title
-        detailMovieBinding.tvOverview.text = movie.overview
-        detailMovieBinding.ratingMovie.rating = movie.rating
-        detailMovieBinding.tvStudio.text = movie.studio
-
+        detailMovieBinding.tvSynopsis.text = movie.overview
+        detailMovieBinding.tvOriginal.text = movie.originalTitle
+        detailMovieBinding.tvHomepage.text = movie.homepage
+        detailMovieBinding.tvStatus.text = movie.status
+        detailMovieBinding.tvDuration.text = formatRuntime(movie.runtime)
+        detailMovieBinding.chartPopularity.setProgress(movie.voteAverage * 10F, true)
+        detailMovieBinding.tvBudget.text = formatCurrency(movie.budget)
+        detailMovieBinding.tvRevenue.text = formatCurrency(movie.revenue)
         detailMovieBinding.btnTrailer.setOnClickListener {
             val intent = Intent(this, TrailerActivity::class.java)
-            intent.putExtra(TrailerActivity.EXTRA_TRAILER, movie.trailerUrl)
+            intent.putExtra(TrailerActivity.EXTRA_TRAILER, "google.com")
             startActivity(intent)
         }
+
+        for(genre in movie.genres){
+            this.generateButtonTextView(genre.name, detailMovieBinding.llGenre)
+        }
+
+        for (language in movie.spokenLanguages){
+            this.generateButtonTextView(language.englishName, detailMovieBinding.llLanguage)
+        }
     }
+
 
     private fun setActionBar(){
         supportActionBar?.title = getString(R.string.detail_movie)

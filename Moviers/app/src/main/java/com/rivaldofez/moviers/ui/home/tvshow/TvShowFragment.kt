@@ -9,8 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.rivaldofez.moviers.databinding.FragmentTvShowBinding
-import com.rivaldofez.moviers.data.source.local.entity.TvShowEntity
+import com.rivaldofez.moviers.data.source.remote.response.tvshow.TvShowItem
 import com.rivaldofez.moviers.ui.detail.tvshow.DetailTvShow
+import com.rivaldofez.moviers.viewmodel.ViewModelFactoryTvShow
 
 class TvShowFragment : Fragment(), TvShowFragmentCallback {
     private lateinit var fragmentTvShowBinding: FragmentTvShowBinding
@@ -27,11 +28,13 @@ class TvShowFragment : Fragment(), TvShowFragmentCallback {
         super.onViewCreated(view, savedInstanceState)
 
         if(activity != null){
-            val viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[TvShowViewModel::class.java]
-            val tvShows = viewModel.getTvShows()
+            val factory = ViewModelFactoryTvShow.getInstance(requireActivity())
+            val viewModel = ViewModelProvider(this, factory)[TvShowViewModel::class.java]
 
             val tvShowAdapter = TvShowAdapter(this)
-            tvShowAdapter.setTvShows(tvShows)
+            viewModel.getPopularTvShows().observe(viewLifecycleOwner, {tvShows->
+                tvShowAdapter.setTvShows(tvShows)
+            })
 
             with(fragmentTvShowBinding.rvTvshow){
                 layoutManager = GridLayoutManager(context, 3)
@@ -40,9 +43,9 @@ class TvShowFragment : Fragment(), TvShowFragmentCallback {
         }
     }
 
-    override fun onTvShowClick(tvShow: TvShowEntity) {
+    override fun onTvShowClick(tvShow: TvShowItem) {
         val intent = Intent(context, DetailTvShow::class.java)
-        intent.putExtra(DetailTvShow.EXTRA_TVSHOW, tvShow.id)
+        intent.putExtra(DetailTvShow.EXTRA_TVSHOW, tvShow.id.toString())
         requireContext().startActivity(intent)
     }
 }

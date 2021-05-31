@@ -1,7 +1,7 @@
 package com.rivaldofez.moviers.ui.home.movie
 
-import com.rivaldofez.moviers.data.source.local.entity.MovieEntity
+import com.rivaldofez.moviers.data.source.remote.response.movie.MovieItem
 
 interface MovieFragmentCallback {
-    fun onMovieClick(movie: MovieEntity)
+    fun onMovieClick(movie: MovieItem)
 }

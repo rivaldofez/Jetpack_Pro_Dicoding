@@ -1,26 +1,16 @@
 package com.rivaldofez.moviers.ui.detail.tvshow
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.rivaldofez.moviers.data.source.local.entity.TvShowEntity
-import com.rivaldofez.moviers.utils.DataDummy
+import com.rivaldofez.moviers.data.source.TvShowRepository
+import com.rivaldofez.moviers.data.source.remote.response.tvshow.TvShowEntityResponse
 
-class DetailTvShowViewModel: ViewModel() {
+class DetailTvShowViewModel(private val tvShowRepository: TvShowRepository): ViewModel() {
     private lateinit var tvShowId: String
 
     fun setCurrentTvShow(tvShowId: String){
         this.tvShowId = tvShowId
     }
 
-    fun getTvShow(): TvShowEntity {
-        lateinit var tvShow: TvShowEntity
-        val tvShows = DataDummy.generateDummyTvShow()
-
-        for(iTvShow in tvShows){
-            if (tvShowId == iTvShow.id){
-                tvShow = iTvShow
-                break
-            }
-        }
-        return tvShow
-    }
+    fun getDetailTvShow() : LiveData<TvShowEntityResponse> = tvShowRepository.getDetailTvShow(tvShowId)
 }

@@ -1,6 +1,5 @@
 package com.rivaldofez.moviers.ui.detail.movie
 
-import com.rivaldofez.moviers.utils.DataDummy
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Before

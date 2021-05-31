@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primary_700"
+    android:background="@color/primary_500"
     tools:context=".ui.detail.tvshow.DetailTvShow">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,11 +14,12 @@
         <ImageView
             android:id="@+id/img_backdrop"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="220dp"
             android:scaleType="fitXY"
             android:contentDescription="@string/backdrop_image"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            tools:src="@drawable/ic_movie_24"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.legacy.widget.Space
@@ -30,180 +31,300 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/img_poster"
-            android:layout_width="120dp"
-            android:layout_height="200dp"
+            android:layout_width="150dp"
+            android:layout_height="220dp"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:scaleType="fitXY"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/space"
             app:shapeAppearanceOverlay="@style/RoundImageView"
             tools:src="@color/white" />
 
-        <androidx.cardview.widget.CardView
+
+        <TextView
+            android:id="@+id/tv_title"
             android:layout_width="0dp"
-            android:layout_height="92dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            app:cardBackgroundColor="@color/primary_500"
-            app:cardCornerRadius="4dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/img_poster"
-            app:layout_constraintTop_toBottomOf="@+id/img_backdrop">
+            app:layout_constraintTop_toBottomOf="@+id/img_backdrop"
+            tools:text="The Flash" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+        <com.ramijemli.percentagechartview.PercentageChartView
+            android:id="@+id/chart_popularity"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toEndOf="@+id/img_poster"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title"
+            app:pcv_animDuration="800"
+            app:pcv_animInterpolator="anticipate_overshoot"
+            app:pcv_backgroundBarColor="@color/primary_700"
+            app:pcv_backgroundBarThickness="6dp"
+            app:pcv_mode="ring"
+            app:pcv_orientation="clockwise"
+            app:pcv_progress="0"
+            app:pcv_progressBarThickness="5dp"
+            app:pcv_progressColor="@color/gold"
+            app:pcv_startAngle="270" />
 
-                <TextView
-                    android:id="@+id/tv_title"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:textSize="18sp"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toStartOf="@+id/tv_episode"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="The Flash"/>
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/chart_popularity"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title"
+            tools:text="Date Release"/>
 
-                <RatingBar
-                    android:id="@+id/rating_tvshow"
-                    style="?android:attr/ratingBarStyleSmall"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="4dp"
-                    android:numStars="5"
-                    android:rating="3.5"
-                    android:stepSize="0.1"
-                    android:theme="@style/Theme.AppCompat.RatingBar"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+        <TextView
+            android:id="@+id/tv_latest_episode"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/chart_popularity"
+            app:layout_constraintTop_toBottomOf="@+id/tv_date"
+            tools:text="Episode Run"/>
 
-                <TextView
-                    android:id="@+id/tv_status"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="4dp"
-                    android:text="@string/status_title"
-                    android:textColor="@color/white"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/rating_tvshow" />
-
-                <TextView
-                    android:id="@+id/tv_episode"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:textColor="@color/white"
-                    android:text="@string/eps_title"
-                    android:textAlignment="center"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardView"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/tv_synopsis_title"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
+            android:text="@string/synopsis_title"
+            android:textStyle="bold"
+            android:textColor="@color/gold"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_poster" />
+
+        <TextView
+            android:id="@+id/tv_synopsis"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            app:cardBackgroundColor="@color/primary_500"
+            android:textColor="@color/gainsboro"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/img_poster">
+            app:layout_constraintTop_toBottomOf="@+id/tv_synopsis_title"
+            tools:text="Senin, 17 Desember 2021" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="8dp">
+        <TextView
+            android:id="@+id/tv_more_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:textStyle="bold"
+            android:text="@string/more_information_title"
+            android:textColor="@color/gold"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_synopsis" />
 
-                <TextView
-                    android:id="@+id/tv_date_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/date_title"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/tv_original_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/original_title"
+            android:textStyle="bold"
+            android:textColor="@color/gainsboro"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_more_title" />
 
-                <TextView
-                    android:id="@+id/tv_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/gainsboro"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_date_title"
-                    tools:text="Senin, 17 Desember 2021" />
+        <TextView
+            android:id="@+id/tv_original"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textColor="@color/gainsboro"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_original_title"
+            tools:text="The Flash"/>
 
-                <TextView
-                    android:id="@+id/tv_studio_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/studio_title"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_date" />
+        <TextView
+            android:id="@+id/tv_genre_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/genre"
+            android:textStyle="bold"
+            android:textColor="@color/gainsboro"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_original" />
 
-                <TextView
-                    android:id="@+id/tv_studio"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/gainsboro"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_studio_title"
-                    tools:text="Warner Bros" />
+        <LinearLayout
+            android:id="@+id/ll_genre"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_genre_title">
+        </LinearLayout>
 
-                <TextView
-                    android:id="@+id/tv_overview_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/overview_title"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_studio" />
+        <LinearLayout
+            android:id="@+id/ll_language"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_language_title">
+        </LinearLayout>
 
-                <TextView
-                    android:id="@+id/tv_overview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/gainsboro"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_overview_title"
-                    tools:text="Lorem ipsum dolor" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
+        <TextView
+            android:id="@+id/tv_language_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/language"
+            android:textStyle="bold"
+            android:textColor="@color/gainsboro"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ll_genre" />
+
+        <TextView
+            android:id="@+id/tv_season_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/season"
+            android:textStyle="bold"
+            android:textColor="@color/gainsboro"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ll_language" />
+
+        <TextView
+            android:id="@+id/tv_season"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textColor="@color/gainsboro"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_season_title"
+            tools:text="10 season"/>
+
+        <TextView
+            android:id="@+id/tv_episode_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/episode"
+            android:textStyle="bold"
+            android:textColor="@color/gainsboro"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_season" />
+
+        <TextView
+            android:id="@+id/tv_episode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textColor="@color/gainsboro"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_episode_title"
+            tools:text="10 season"/>
+
+        <TextView
+            android:id="@+id/tv_homepage_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/home_page"
+            android:textStyle="bold"
+            android:textColor="@color/gainsboro"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_episode" />
+
+        <TextView
+            android:id="@+id/tv_homepage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textColor="@color/gainsboro"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_homepage_title"
+            tools:text="Lorem ipsum dolor sit amet"/>
+
+        <TextView
+            android:id="@+id/tv_status_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/status"
+            android:textStyle="bold"
+            android:textColor="@color/gainsboro"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_homepage" />
+
+        <TextView
+            android:id="@+id/tv_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textColor="@color/gainsboro"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_status_title"
+            tools:text="End"/>
+
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_trailer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:backgroundTint="@color/huegreen"
             android:text="@string/trailer"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_status" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

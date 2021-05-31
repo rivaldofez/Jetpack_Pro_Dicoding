@@ -26,7 +26,12 @@
 
     <style name="RoundImageView">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">4dp</item>
+        <item name="cornerSize">12dp</item>
         <item name="color">@color/white</item>
+    </style>
+
+    <style name="ToggleGenre">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 </resources>

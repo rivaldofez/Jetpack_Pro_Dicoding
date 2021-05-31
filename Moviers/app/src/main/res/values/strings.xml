@@ -13,4 +13,16 @@
     <string name="trailer">Trailer</string>
     <string name="detail_movie">Detail Movie</string>
     <string name="detail_tvshow">Detail TV Show</string>
+    <string name="synopsis_title">Synopsis</string>
+    <string name="more_information_title">More Information</string>
+    <string name="original_title">Original Title</string>
+    <string name="home_page">Home Page</string>
+    <string name="budget">Budget</string>
+    <string name="genre">Genre</string>
+    <string name="language">Language</string>
+    <string name="revenue">Revenue</string>
+    <string name="status">Status</string>
+    <string name="episode_run">Episode Run</string>
+    <string name="season">Season</string>
+    <string name="episode">Episode</string>
 </resources>

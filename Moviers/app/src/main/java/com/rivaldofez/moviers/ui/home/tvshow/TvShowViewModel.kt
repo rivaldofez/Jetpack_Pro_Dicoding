@@ -1,9 +1,10 @@
 package com.rivaldofez.moviers.ui.home.tvshow
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.rivaldofez.moviers.data.source.local.entity.TvShowEntity
-import com.rivaldofez.moviers.utils.DataDummy
+import com.rivaldofez.moviers.data.source.TvShowRepository
+import com.rivaldofez.moviers.data.source.remote.response.tvshow.TvShowItem
 
-class TvShowViewModel: ViewModel() {
-    fun getTvShows() : List<TvShowEntity> = DataDummy.generateDummyTvShow()
+class TvShowViewModel(private val tvShowRepository: TvShowRepository): ViewModel() {
+    fun getPopularTvShows(): LiveData<List<TvShowItem>> = tvShowRepository.getPopularTvShows()
 }

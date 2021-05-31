@@ -1,6 +1,5 @@
 package com.rivaldofez.moviers.ui.detail.tvshow
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
@@ -9,8 +8,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.rivaldofez.moviers.R
 import com.rivaldofez.moviers.databinding.ActivityDetailTvShowBinding
-import com.rivaldofez.moviers.data.source.local.entity.TvShowEntity
+import com.rivaldofez.moviers.data.source.remote.response.tvshow.TvShowEntityResponse
 import com.rivaldofez.moviers.ui.trailer.TrailerActivity
+import com.rivaldofez.moviers.utils.formatDate
+import com.rivaldofez.moviers.utils.generateButtonTextView
+import com.rivaldofez.moviers.viewmodel.ViewModelFactoryTvShow
 
 class DetailTvShow : AppCompatActivity() {
     companion object {
@@ -25,35 +27,47 @@ class DetailTvShow : AppCompatActivity() {
         setContentView(detailTvShowBinding.root)
         setActionBar()
 
-        val viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[DetailTvShowViewModel::class.java]
+        val factory = ViewModelFactoryTvShow.getInstance(this)
+        val viewModel = ViewModelProvider(this, factory)[DetailTvShowViewModel::class.java]
 
         val bundle = intent.extras
         if(bundle != null){
             val tvShowId = bundle.getString(EXTRA_TVSHOW)
             if(tvShowId != null){
                 viewModel.setCurrentTvShow(tvShowId)
-                setViewContent(viewModel.getTvShow())
+                viewModel.getDetailTvShow().observe(this, {tvshow->
+                    setViewContent(tvshow)
+                })
             }
         }
     }
 
-    @SuppressLint("StringFormatMatches")
-    private fun setViewContent(tvShow: TvShowEntity){
-        Glide.with(this).load(tvShow.posterPath).into(detailTvShowBinding.imgPoster)
-        Glide.with(this).load(tvShow.backdropPath).into(detailTvShowBinding.imgBackdrop)
-        detailTvShowBinding.tvDate.text = tvShow.date
-        detailTvShowBinding.tvTitle.text = tvShow.title
-        detailTvShowBinding.tvOverview.text = tvShow.overview
-        detailTvShowBinding.ratingTvshow.rating = tvShow.rating
+    private fun setViewContent(tvShow: TvShowEntityResponse){
+        Glide.with(this).load("https://image.tmdb.org/t/p/w500"+tvShow.posterPath).into(detailTvShowBinding.imgPoster)
+        Glide.with(this).load("https://image.tmdb.org/t/p/w500"+tvShow.backdropPath).into(detailTvShowBinding.imgBackdrop)
+        detailTvShowBinding.tvDate.text = formatDate(tvShow.firstAirDate)
+        detailTvShowBinding.tvTitle.text = tvShow.name
+        detailTvShowBinding.tvSynopsis.text = tvShow.overview
+        detailTvShowBinding.tvOriginal.text = tvShow.originalName
+        detailTvShowBinding.tvHomepage.text = tvShow.homepage
         detailTvShowBinding.tvStatus.text = tvShow.status
-        detailTvShowBinding.tvStudio.text = tvShow.studio
-        detailTvShowBinding.tvEpisode.text = getString(R.string.eps_title,tvShow.episode.toString())
-
+        detailTvShowBinding.tvEpisode.text = tvShow.numberOfEpisodes.toString()
+        detailTvShowBinding.tvSeason.text = tvShow.numberOfSeasons.toString()
+        detailTvShowBinding.tvLatestEpisode.text = "Run Episode " + tvShow.lastEpisodeToAir.episodeNumber.toString()
+        detailTvShowBinding.chartPopularity.setProgress(tvShow.voteAverage * 10F, true)
 
         detailTvShowBinding.btnTrailer.setOnClickListener{
             val intent = Intent(this, TrailerActivity::class.java)
-            intent.putExtra(TrailerActivity.EXTRA_TRAILER, tvShow.trailerUrl)
+            intent.putExtra(TrailerActivity.EXTRA_TRAILER, "google.com")
             startActivity(intent)
+        }
+
+        for(genre in tvShow.genres){
+            this.generateButtonTextView(genre.name, detailTvShowBinding.llGenre)
+        }
+
+        for (language in tvShow.spokenLanguages){
+            this.generateButtonTextView(language.englishName, detailTvShowBinding.llLanguage)
         }
     }
 

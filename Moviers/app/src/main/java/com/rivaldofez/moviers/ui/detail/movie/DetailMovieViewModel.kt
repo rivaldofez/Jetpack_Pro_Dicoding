@@ -1,26 +1,16 @@
 package com.rivaldofez.moviers.ui.detail.movie
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.rivaldofez.moviers.data.source.local.entity.MovieEntity
-import com.rivaldofez.moviers.utils.DataDummy
+import com.rivaldofez.moviers.data.source.MovieRepository
+import com.rivaldofez.moviers.data.source.remote.response.movie.MovieEntityResponse
 
-class DetailMovieViewModel : ViewModel(){
+class DetailMovieViewModel(private val movieRepository: MovieRepository) : ViewModel(){
     private lateinit var movieId: String
 
     fun setCurrentMovie(movieId: String){
         this.movieId = movieId
     }
 
-    fun getMovie(): MovieEntity {
-        lateinit var movie: MovieEntity
-        val movies = DataDummy.generateDummyMovies()
-
-        for(iMovie in movies){
-            if (movieId == iMovie.id){
-                movie = iMovie
-                break
-            }
-        }
-        return movie
-    }
+    fun getDetailMovie(): LiveData<MovieEntityResponse> = movieRepository.getDetailMovie(movieId)
 }

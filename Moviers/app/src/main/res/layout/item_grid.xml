@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    android:background="@color/primary_700">
+    android:background="@color/primary_500">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_poster"
@@ -25,7 +25,7 @@
             android:layout_height="170dp"
             android:contentDescription="@string/movie_posters"
             android:scaleType="fitXY"
-            tools:src="@color/huegreen"/>
+            android:src="@drawable/refresh"/>
 
     </androidx.cardview.widget.CardView>
 
@@ -36,7 +36,6 @@
         android:layout_marginTop="8dp"
         android:ellipsize="end"
         android:maxLines="2"
-
         android:textColor="@color/white"
         android:textSize="14sp"
         android:textStyle="bold"
@@ -50,8 +49,6 @@
         style="?android:attr/ratingBarStyleSmall"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:numStars="5"
-        android:rating="3.5"
         android:stepSize="0.1"
         android:theme="@style/Theme.AppCompat.RatingBar"
         app:layout_constraintBottom_toBottomOf="parent"

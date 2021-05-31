@@ -1,4 +1,4 @@
-package com.rivaldofez.moviers.data.source
+package com.rivaldofez.moviers.data.source.remote.response
 
 import android.util.Log
 import com.rivaldofez.moviers.BuildConfig
@@ -25,7 +25,7 @@ class RemoteDataSource {
     }
 
     fun getPopularMovies(callback: LoadPopularMoviesCallback){
-        val client = ApiConfig.getApiService().getPopularMovies(BuildConfig.API_KEY, "1")
+        val client = ApiConfig.getApiService().getPopularMovies(key = BuildConfig.API_KEY, page = "1")
         client.enqueue(object: Callback<MovieListResponse>{
             override fun onResponse(
                 call: Call<MovieListResponse>,
@@ -41,7 +41,7 @@ class RemoteDataSource {
     }
 
     fun getPopularTvShow(callback: LoadPopularTvShowCallback){
-        val client = ApiConfig.getApiService().getPopularTvShow(BuildConfig.API_KEY, "1")
+        val client = ApiConfig.getApiService().getPopularTvShow(key = BuildConfig.API_KEY, page = "1")
         client.enqueue(object: Callback<TvShowListResponse>{
             override fun onResponse(
                 call: Call<TvShowListResponse>,
@@ -57,7 +57,7 @@ class RemoteDataSource {
     }
 
     fun getDetailMovie(callback: LoadDetailMovieCallback, movieId: String){
-        val client = ApiConfig.getApiService().getMovieById(BuildConfig.API_KEY, movieId)
+        val client = ApiConfig.getApiService().getMovieById(key = BuildConfig.API_KEY,id =  movieId)
         client.enqueue(object: Callback<MovieEntityResponse>{
             override fun onResponse(
                 call: Call<MovieEntityResponse>,
@@ -73,7 +73,7 @@ class RemoteDataSource {
     }
 
     fun getDetailTvShow(callback: LoadDetailTvShowCallback, tvShowId: String){
-        val client = ApiConfig.getApiService().getTvShowById(BuildConfig.API_KEY, tvShowId)
+        val client = ApiConfig.getApiService().getTvShowById(key = BuildConfig.API_KEY, id = tvShowId)
         client.enqueue(object: Callback<TvShowEntityResponse>{
             override fun onResponse(
                 call: Call<TvShowEntityResponse>,

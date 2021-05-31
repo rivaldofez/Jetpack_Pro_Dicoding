@@ -9,8 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.rivaldofez.moviers.databinding.FragmentMovieBinding
-import com.rivaldofez.moviers.data.source.local.entity.MovieEntity
+import com.rivaldofez.moviers.data.source.remote.response.movie.MovieItem
 import com.rivaldofez.moviers.ui.detail.movie.DetailMovie
+import com.rivaldofez.moviers.viewmodel.ViewModelFactoryMovie
 
 class MovieFragment : Fragment(), MovieFragmentCallback {
     private lateinit var fragmentMovieBinding: FragmentMovieBinding
@@ -24,11 +25,14 @@ class MovieFragment : Fragment(), MovieFragmentCallback {
         super.onViewCreated(view, savedInstanceState)
 
         if(activity != null){
-            val viewModel = ViewModelProvider(this,ViewModelProvider.NewInstanceFactory())[MovieViewModel::class.java]
-            val movies = viewModel.getMovies()
+            val factory = ViewModelFactoryMovie.getInstance(requireActivity())
+            val viewModel = ViewModelProvider(this,factory)[MovieViewModel::class.java]
 
             val movieAdapter = MovieAdapter(this)
-            movieAdapter.setMovies(movies)
+
+            viewModel.getPopularMovies().observe(viewLifecycleOwner,{movies ->
+                movieAdapter.setMovies(movies)
+            })
 
             with(fragmentMovieBinding.rvMovies){
                 layoutManager = GridLayoutManager(context, 3)
@@ -37,9 +41,9 @@ class MovieFragment : Fragment(), MovieFragmentCallback {
         }
     }
 
-    override fun onMovieClick(movie: MovieEntity) {
+    override fun onMovieClick(movie: MovieItem) {
         val intent = Intent(context, DetailMovie::class.java)
-        intent.putExtra(DetailMovie.EXTRA_MOVIE, movie.id)
+        intent.putExtra(DetailMovie.EXTRA_MOVIE, movie.id.toString())
         requireContext().startActivity(intent)
     }
 }

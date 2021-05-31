@@ -1,9 +1,10 @@
 package com.rivaldofez.moviers.ui.home.movie
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.rivaldofez.moviers.data.source.local.entity.MovieEntity
-import com.rivaldofez.moviers.utils.DataDummy
+import com.rivaldofez.moviers.data.source.MovieRepository
+import com.rivaldofez.moviers.data.source.remote.response.movie.MovieItem
 
-class MovieViewModel: ViewModel() {
-    fun getMovies() : List<MovieEntity> = DataDummy.generateDummyMovies()
+class MovieViewModel(private val movieRepository: MovieRepository): ViewModel() {
+    fun getPopularMovies(): LiveData<List<MovieItem>> = movieRepository.getPopularMovies()
 }

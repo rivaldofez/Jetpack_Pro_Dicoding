@@ -5,12 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.rivaldofez.moviers.databinding.ItemGridBinding
-import com.rivaldofez.moviers.data.source.local.entity.MovieEntity
+import com.rivaldofez.moviers.data.source.remote.response.movie.MovieItem
 
 class MovieAdapter(private val callback: MovieFragmentCallback): RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
-    private val listMovies = ArrayList<MovieEntity>()
+    private val listMovies = ArrayList<MovieItem>()
 
-    fun setMovies(movies: List<MovieEntity>?) {
+    fun setMovies(movies: List<MovieItem>?) {
         if (movies == null) return
         this.listMovies.clear()
         this.listMovies.addAll(movies)
@@ -31,14 +31,14 @@ class MovieAdapter(private val callback: MovieFragmentCallback): RecyclerView.Ad
     override fun getItemCount(): Int = listMovies.size
 
     inner class MovieViewHolder(private val binding: ItemGridBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(movie: MovieEntity){
+        fun bind(movie: MovieItem){
             with(binding){
                 tvTitle.text = movie.title
-                ratingMovie.rating = movie.rating
+                ratingMovie.rating = (0.5F * movie.voteAverage.toFloat())
 
                 containerItem.setOnClickListener{callback.onMovieClick(movie)}
 
-                Glide.with(itemView.context).load(movie.posterPath)
+                Glide.with(itemView.context).load("https://image.tmdb.org/t/p/w500"+movie.posterPath)
                     .into(imgPoster)
             }
         }

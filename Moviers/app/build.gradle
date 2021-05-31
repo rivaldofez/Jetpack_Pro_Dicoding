@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-parcelize'
+    id 'androidx.navigation.safeargs'
 }
 
 android {
@@ -62,7 +63,15 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    
+
+    implementation "com.google.dagger:dagger-android:$daggerVersion"
+    implementation "com.google.dagger:dagger-android-support:$daggerVersion"
+    annotationProcessor "com.google.dagger:dagger-android-processor:$daggerVersion"
+    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
+
+    implementation 'com.ramijemli.percentagechartview:percentagechartview:0.3.0'
+    implementation 'com.gauravk.bubblenavigation:bubblenavigation:1.0.7'
+
     //testing
     implementation "androidx.test.espresso:espresso-idling-resource:$idleResourceVersion"
 

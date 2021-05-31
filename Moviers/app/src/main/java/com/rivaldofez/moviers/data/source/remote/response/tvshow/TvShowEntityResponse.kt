@@ -71,7 +71,7 @@ data class TvShowEntityResponse(
 	val originalName: String,
 
 	@field:SerializedName("vote_average")
-	val voteAverage: Int,
+	val voteAverage: Float,
 
 	@field:SerializedName("name")
 	val name: String,
@@ -113,7 +113,7 @@ data class LastEpisodeToAir(
 	val episodeNumber: Int,
 
 	@field:SerializedName("vote_average")
-	val voteAverage: Int,
+	val voteAverage: Float,
 
 	@field:SerializedName("name")
 	val name: String,

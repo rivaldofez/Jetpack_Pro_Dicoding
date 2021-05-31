@@ -38,7 +38,7 @@ class AcademyRepository private constructor(private val remoteDataSource: Remote
                 courseResults.postValue(courseList)
             }
         })
-        Espre
+
         return courseResults
     }
 

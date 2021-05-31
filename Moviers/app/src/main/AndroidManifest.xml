@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Moviers">
-        <activity android:name=".ui.trailer.TrailerActivity"></activity>
+        <activity android:name=".ui.trailer.TrailerActivity"/>
         <activity android:name=".ui.detail.movie.DetailMovie" />
         <activity android:name=".ui.detail.tvshow.DetailTvShow" />
         <activity android:name=".ui.home.HomeActivity"

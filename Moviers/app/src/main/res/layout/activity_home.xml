@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primary_700"
+    android:background="@color/primary_500"
     tools:context=".ui.home.HomeActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -41,14 +41,40 @@
         app:navGraph="@navigation/main_navigation"
         tools:ignore="FragmentTagUsage" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
+    <com.gauravk.bubblenavigation.BubbleNavigationConstraintView
         android:id="@+id/bnav_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_bottom_navbar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/main_menu" />
+        android:elevation="8dp"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        app:bnc_mode="spread"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <com.gauravk.bubblenavigation.BubbleToggleView
+            android:id="@+id/nav_movie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:bt_active="true"
+            app:bt_colorActive="@color/gold"
+            app:bt_colorInactive="@color/white"
+            app:bt_icon="@drawable/ic_movie_24"
+            app:bt_shape="@drawable/bg_toggle_navigation"
+            app:bt_title="Movie" />
+
+        <com.gauravk.bubblenavigation.BubbleToggleView
+            android:id="@+id/nav_tvshow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:bt_colorActive="@color/gold"
+            app:bt_colorInactive="@color/white"
+            app:bt_icon="@drawable/ic_tvshow_24"
+            app:bt_shape="@drawable/bg_toggle_navigation"
+            app:bt_title="Tv Show" />
+
+        <!-- Add more child items here - max upto 5 -->
+
+    </com.gauravk.bubblenavigation.BubbleNavigationConstraintView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
