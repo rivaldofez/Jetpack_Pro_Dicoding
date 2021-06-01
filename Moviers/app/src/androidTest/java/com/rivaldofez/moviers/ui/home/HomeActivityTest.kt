@@ -1,93 +1,156 @@
 package com.rivaldofez.moviers.ui.home
 
-import android.widget.RatingBar
 import androidx.recyclerview.widget.RecyclerView
+import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
-import androidx.test.ext.junit.rules.ActivityScenarioRule
+import com.ramijemli.percentagechartview.PercentageChartView
 import com.rivaldofez.moviers.R
-import org.junit.Rule
+import com.rivaldofez.moviers.utils.*
+import org.junit.After
+import org.junit.Before
 import org.junit.Test
 
 class HomeActivityTest{
-    private val dummyMovies = DataDummy.generateDummyMovies()
-    private val dummyTvShows = DataDummy.generateDummyTvShow()
+    private val dummyDetailMovie = DataDummy.generateDetailMovie()
+    private val dummyDetailTvShow = DataDummy.generateDetailTvShow()
 
-    @get:Rule
-    var activityRule = ActivityScenarioRule(HomeActivity::class.java)
+    @Before
+    fun setUp() {
+        ActivityScenario.launch(HomeActivity::class.java)
+        IdlingRegistry.getInstance().register(EspressoIdlingResource.idlingResource)
+    }
+
+    @After
+    fun tearDown() {
+        IdlingRegistry.getInstance().unregister(EspressoIdlingResource.idlingResource)
+    }
 
     @Test
     fun loadMovies(){
+        //check recylerview and scroll to last data from api
         onView(withId(R.id.rv_movies)).check(matches(isDisplayed()))
-        onView(withId(R.id.rv_movies)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(dummyMovies.size))
+        onView(withId(R.id.rv_movies)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(20))
     }
 
     @Test
     fun loadDetailMovie(){
+        //Click on first item
         onView(withId(R.id.rv_movies)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
-        onView(withId(R.id.btn_trailer)).perform(ViewActions.scrollTo())
 
-        val movieAttribute = listOf(R.id.tv_original_title,R.id.tv_overview,R.id.tv_date,R.id.tv_title,
-            R.id.img_poster, R.id.img_backdrop, R.id.rating_movie, R.id.btn_trailer)
+        //check displayed item
+        var movieAttribute = listOf(R.id.img_backdrop, R.id.img_poster, R.id.chart_popularity,
+            R.id.tv_date, R.id.tv_duration)
+        for(idAttr in movieAttribute){
+            onView(withId(idAttr)).check(matches(isDisplayed()))
+        }
+
+        //scroll page to end
+        onView(withId(R.id.btn_home_page)).perform(ViewActions.scrollTo())
+
+        //check next displayed item after scrolling
+        movieAttribute = listOf(R.id.tv_synopsis, R.id.tv_synopsis_title, R.id.tv_more_title,
+            R.id.tv_original_title, R.id.tv_original, R.id.tv_genre_title, R.id.ll_genre, R.id.tv_language_title,
+            R.id.ll_language, R.id.tv_homepage_title, R.id.tv_homepage, R.id.tv_budget, R.id.tv_budget_title,
+            R.id.tv_revenue_title, R.id.tv_revenue, R.id.tv_status_title, R.id.tv_status, R.id.btn_home_page)
 
         for(idAttr in movieAttribute){
             onView(withId(idAttr)).check(matches(isDisplayed()))
         }
 
-        onView(withId(R.id.tv_overview)).check(matches(withText(dummyMovies[0].overview)))
-        onView(withId(R.id.tv_title)).check(matches(withText(dummyMovies[0].title)))
-        onView(withId(R.id.tv_original_title)).check(matches(withText(dummyMovies[0].studio)))
-        onView(withId(R.id.tv_date)).check(matches(withText(dummyMovies[0].date)))
-        onView(withId(R.id.rating_movie)).check(matches(isAssignableFrom(RatingBar::class.java)))
+        //check value and match textview with data
+        onView(withId(R.id.tv_title)).check(matches(withText(dummyDetailMovie.title)))
+        onView(withId(R.id.tv_duration)).check(matches(withText(formatRuntime(dummyDetailMovie.runtime))))
+        onView(withId(R.id.tv_date)).check(matches(withText(formatDate(dummyDetailMovie.releaseDate))))
+        onView(withId(R.id.tv_synopsis)).check(matches(withText(dummyDetailMovie.overview)))
+        onView(withId(R.id.tv_original)).check(matches(withText(dummyDetailMovie.originalTitle)))
+        onView(withId(R.id.tv_homepage)).check(matches(withText(dummyDetailMovie.homepage)))
+        onView(withId(R.id.tv_budget)).check(matches(withText(formatCurrency(dummyDetailMovie.budget))))
+        onView(withId(R.id.tv_revenue)).check(matches(withText(formatCurrency(dummyDetailMovie.revenue))))
+        onView(withId(R.id.tv_status)).check(matches(withText(dummyDetailMovie.status)))
+
+        //check vote chart assignable
+        onView(withId(R.id.chart_popularity)).check(matches(isAssignableFrom(PercentageChartView::class.java)))
+
+        //check-match num of child item of languages and genre which  generated from data
+        onView(withId(R.id.ll_language)).check(matches(hasChildCount(dummyDetailMovie.spokenLanguages.size)))
+        onView(withId(R.id.ll_genre)).check(matches(hasChildCount(dummyDetailMovie.genres.size)))
     }
 
     @Test
-    fun loadTrailerMovie(){
+    fun loadHomePageMovies(){
+        //check web view movies home page
         onView(withId(R.id.rv_movies)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
-        onView(withId(R.id.btn_trailer)).perform(ViewActions.scrollTo())
-        onView(withId(R.id.btn_trailer)).perform(click())
+        onView(withId(R.id.btn_home_page)).perform(ViewActions.scrollTo())
+        onView(withId(R.id.btn_home_page)).perform(click())
         onView(withId(R.id.web_trailer)).check(matches(isDisplayed()))
     }
 
     @Test
     fun loadTvShows(){
-        onView(withId(R.id.tvShowFragment)).perform(click())
+        //check recylerview and scroll to last data from api
+        onView(withId(R.id.nav_tvshow)).perform(click())
         onView(withId(R.id.rv_tvshow)).check(matches(isDisplayed()))
-        onView(withId(R.id.rv_tvshow)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(dummyTvShows.size))
+        onView(withId(R.id.rv_tvshow)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(20))
     }
 
     @Test
     fun loadDetailTvShow(){
-        onView(withId(R.id.tvShowFragment)).perform(click())
+        //Click on first item
+        onView(withId(R.id.nav_tvshow)).perform(click())
         onView(withId(R.id.rv_tvshow)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
-        onView(withId(R.id.btn_trailer)).perform(ViewActions.scrollTo())
 
-        val tvShowAttribute = listOf(R.id.tv_original_title,R.id.tv_overview,R.id.tv_date,R.id.tv_title,
-            R.id.tv_status, R.id.tv_episode , R.id.img_poster, R.id.img_backdrop, R.id.rating_tvshow,
-            R.id.btn_trailer)
+        //check displayed item
+        var tvShowAttribute = listOf(R.id.img_backdrop, R.id.img_poster, R.id.chart_popularity,
+            R.id.tv_date, R.id.tv_latest_episode)
+        for(idAttr in tvShowAttribute){
+            onView(withId(idAttr)).check(matches(isDisplayed()))
+        }
+
+        //scroll page to end
+        onView(withId(R.id.btn_home_page)).perform(ViewActions.scrollTo())
+
+        //check next displayed item after scrolling
+        tvShowAttribute = listOf(R.id.tv_synopsis, R.id.tv_synopsis_title, R.id.tv_more_title,
+            R.id.tv_original_title, R.id.tv_original, R.id.tv_genre_title, R.id.ll_genre, R.id.tv_language_title,
+            R.id.ll_language, R.id.tv_season_title, R.id.tv_season, R.id.tv_episode_title, R.id.tv_episode,
+            R.id.tv_homepage_title, R.id.tv_homepage, R.id.tv_status, R.id.btn_home_page)
 
         for(idAttr in tvShowAttribute){
             onView(withId(idAttr)).check(matches(isDisplayed()))
         }
-        onView(withId(R.id.tv_overview)).check(matches(withText(dummyTvShows[0].overview)))
-        onView(withId(R.id.tv_title)).check(matches(withText(dummyTvShows[0].title)))
-        onView(withId(R.id.tv_original_title)).check(matches(withText(dummyTvShows[0].studio)))
-        onView(withId(R.id.tv_date)).check(matches(withText(dummyTvShows[0].date)))
-        onView(withId(R.id.tv_status)).check(matches(withText(dummyTvShows[0].status)))
-        onView(withId(R.id.tv_episode)).check(matches(withText("${dummyTvShows[0].episode}\nEPS")))
-        onView(withId(R.id.rating_tvshow)).check(matches(isAssignableFrom(RatingBar::class.java)))
+
+        //check value and match textview with data
+        onView(withId(R.id.tv_title)).check(matches(withText(dummyDetailTvShow.name)))
+        onView(withId(R.id.tv_latest_episode)).check(matches(withText("Latest Run ${dummyDetailTvShow.episodeRunTime}")))
+        onView(withId(R.id.tv_date)).check(matches(withText(formatDate(dummyDetailTvShow.firstAirDate))))
+        onView(withId(R.id.tv_synopsis)).check(matches(withText(dummyDetailTvShow.overview)))
+        onView(withId(R.id.tv_original)).check(matches(withText(dummyDetailTvShow.originalName)))
+        onView(withId(R.id.tv_homepage)).check(matches(withText(dummyDetailTvShow.homepage)))
+        onView(withId(R.id.tv_season)).check(matches(withText(dummyDetailTvShow.numberOfSeasons.toString())))
+        onView(withId(R.id.tv_episode)).check(matches(withText(dummyDetailTvShow.numberOfEpisodes.toString())))
+        onView(withId(R.id.tv_status)).check(matches(withText(dummyDetailTvShow.status)))
+
+        //check vote chart assignable
+        onView(withId(R.id.chart_popularity)).check(matches(isAssignableFrom(PercentageChartView::class.java)))
+
+        //check-match num of child item of languages and genre which  generated from data
+        onView(withId(R.id.ll_language)).check(matches(hasChildCount(dummyDetailTvShow.spokenLanguages.size)))
+        onView(withId(R.id.ll_genre)).check(matches(hasChildCount(dummyDetailTvShow.genres.size)))
     }
 
     @Test
-    fun loadTrailerTv(){
-        onView(withId(R.id.tvShowFragment)).perform(click())
+    fun loadHomepageTv(){
+        //check web view movies home page
+        onView(withId(R.id.nav_tvshow)).perform(click())
         onView(withId(R.id.rv_tvshow)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
-        onView(withId(R.id.btn_trailer)).perform(ViewActions.scrollTo())
-        onView(withId(R.id.btn_trailer)).perform(click())
+        onView(withId(R.id.btn_home_page)).perform(ViewActions.scrollTo())
+        onView(withId(R.id.btn_home_page)).perform(click())
         onView(withId(R.id.web_trailer)).check(matches(isDisplayed()))
     }
 }

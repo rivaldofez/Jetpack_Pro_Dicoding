@@ -7,10 +7,12 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.rivaldofez.moviers.BuildConfig
 import com.rivaldofez.moviers.R
 import com.rivaldofez.moviers.databinding.ActivityDetailTvShowBinding
 import com.rivaldofez.moviers.data.source.remote.response.tvshow.TvShowEntityResponse
 import com.rivaldofez.moviers.ui.webview.WebViewActivity
+import com.rivaldofez.moviers.utils.DataDummy
 import com.rivaldofez.moviers.utils.formatDate
 import com.rivaldofez.moviers.utils.generateButtonTextView
 import com.rivaldofez.moviers.viewmodel.ViewModelFactoryTvShow
@@ -51,8 +53,8 @@ class DetailTvShow : AppCompatActivity() {
     }
 
     private fun setViewContent(tvShow: TvShowEntityResponse){
-        Glide.with(this).load("https://image.tmdb.org/t/p/w500"+tvShow.posterPath).into(detailTvShowBinding.imgPoster)
-        Glide.with(this).load("https://image.tmdb.org/t/p/w500"+tvShow.backdropPath).into(detailTvShowBinding.imgBackdrop)
+        Glide.with(this).load(BuildConfig.API_PATH_IMAGE + tvShow.posterPath).into(detailTvShowBinding.imgPoster)
+        Glide.with(this).load(BuildConfig.API_PATH_IMAGE + tvShow.backdropPath).into(detailTvShowBinding.imgBackdrop)
         detailTvShowBinding.tvDate.text = formatDate(tvShow.firstAirDate)
         detailTvShowBinding.tvTitle.text = tvShow.name
         detailTvShowBinding.tvSynopsis.text = tvShow.overview
@@ -64,7 +66,7 @@ class DetailTvShow : AppCompatActivity() {
         detailTvShowBinding.tvLatestEpisode.text = getString(R.string.episode_run, tvShow.episodeRunTime.toString())
         detailTvShowBinding.chartPopularity.setProgress(tvShow.voteAverage * 10F, true)
 
-        detailTvShowBinding.btnTrailer.setOnClickListener{
+        detailTvShowBinding.btnHomePage.setOnClickListener{
             val intent = Intent(this, WebViewActivity::class.java)
             intent.putExtra(WebViewActivity.EXTRA_LINKS, tvShow.homepage)
             startActivity(intent)

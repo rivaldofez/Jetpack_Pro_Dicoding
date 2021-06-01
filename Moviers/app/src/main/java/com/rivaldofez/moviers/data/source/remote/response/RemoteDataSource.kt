@@ -9,6 +9,7 @@ import com.rivaldofez.moviers.data.source.remote.response.movie.MovieListRespons
 import com.rivaldofez.moviers.data.source.remote.response.tvshow.TvShowEntityResponse
 import com.rivaldofez.moviers.data.source.remote.response.tvshow.TvShowItem
 import com.rivaldofez.moviers.data.source.remote.response.tvshow.TvShowListResponse
+import com.rivaldofez.moviers.utils.EspressoIdlingResource
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -25,6 +26,7 @@ class RemoteDataSource {
     }
 
     fun getPopularMovies(callback: LoadPopularMoviesCallback){
+        EspressoIdlingResource.increment()
         val client = ApiConfig.getApiService().getPopularMovies(key = BuildConfig.API_KEY, page = "1")
         client.enqueue(object: Callback<MovieListResponse>{
             override fun onResponse(
@@ -32,15 +34,18 @@ class RemoteDataSource {
                 response: Response<MovieListResponse>
             ) {
                 response.body()?.results?.let { callback.onPopularMoviesLoaded(it) }
+                EspressoIdlingResource.decrement()
             }
 
             override fun onFailure(call: Call<MovieListResponse>, t: Throwable) {
                 Log.e("RemoteDataSource", "fail at getPopularMovies because: ${t.message}")
+                EspressoIdlingResource.decrement()
             }
         })
     }
 
     fun getPopularTvShow(callback: LoadPopularTvShowCallback){
+        EspressoIdlingResource.increment()
         val client = ApiConfig.getApiService().getPopularTvShow(key = BuildConfig.API_KEY, page = "1")
         client.enqueue(object: Callback<TvShowListResponse>{
             override fun onResponse(
@@ -48,15 +53,18 @@ class RemoteDataSource {
                 response: Response<TvShowListResponse>
             ) {
                 response.body()?.results?.let { callback.onPopularTvShowsLoaded(it) }
+                EspressoIdlingResource.decrement()
             }
 
             override fun onFailure(call: Call<TvShowListResponse>, t: Throwable) {
                 Log.e("RemoteDataSource", "fail at getPopularTvShows because: ${t.message}")
+                EspressoIdlingResource.decrement()
             }
         })
     }
 
     fun getDetailMovie(callback: LoadDetailMovieCallback, movieId: String){
+        EspressoIdlingResource.increment()
         val client = ApiConfig.getApiService().getMovieById(key = BuildConfig.API_KEY,id =  movieId)
         client.enqueue(object: Callback<MovieEntityResponse>{
             override fun onResponse(
@@ -64,15 +72,18 @@ class RemoteDataSource {
                 response: Response<MovieEntityResponse>
             ) {
                 response.body()?.let { callback.onMovieLoaded(it) }
+                EspressoIdlingResource.decrement()
             }
 
             override fun onFailure(call: Call<MovieEntityResponse>, t: Throwable) {
                 Log.e("RemoteDataSource", "fail at getDetailMovie because: ${t.message}")
+                EspressoIdlingResource.decrement()
             }
         })
     }
 
     fun getDetailTvShow(callback: LoadDetailTvShowCallback, tvShowId: String){
+        EspressoIdlingResource.increment()
         val client = ApiConfig.getApiService().getTvShowById(key = BuildConfig.API_KEY, id = tvShowId)
         client.enqueue(object: Callback<TvShowEntityResponse>{
             override fun onResponse(
@@ -80,10 +91,12 @@ class RemoteDataSource {
                 response: Response<TvShowEntityResponse>
             ) {
                 response.body()?.let { callback.onTvShowLoaded(it) }
+                EspressoIdlingResource.decrement()
             }
 
             override fun onFailure(call: Call<TvShowEntityResponse>, t: Throwable) {
                 Log.e("RemoteDataSource", "fail at getDetailTvShow because: ${t.message}")
+                EspressoIdlingResource.decrement()
             }
         })
     }

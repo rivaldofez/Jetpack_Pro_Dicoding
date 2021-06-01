@@ -7,14 +7,12 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.rivaldofez.moviers.BuildConfig
 import com.rivaldofez.moviers.R
 import com.rivaldofez.moviers.databinding.ActivityDetailMovieBinding
 import com.rivaldofez.moviers.data.source.remote.response.movie.MovieEntityResponse
 import com.rivaldofez.moviers.ui.webview.WebViewActivity
-import com.rivaldofez.moviers.utils.formatCurrency
-import com.rivaldofez.moviers.utils.formatDate
-import com.rivaldofez.moviers.utils.formatRuntime
-import com.rivaldofez.moviers.utils.generateButtonTextView
+import com.rivaldofez.moviers.utils.*
 import com.rivaldofez.moviers.viewmodel.ViewModelFactoryMovie
 
 class DetailMovie : AppCompatActivity() {
@@ -53,10 +51,11 @@ class DetailMovie : AppCompatActivity() {
     }
 
     private fun setContentView(movie: MovieEntityResponse){
-        Glide.with(this).load("https://image.tmdb.org/t/p/w500"+movie.posterPath).into(detailMovieBinding.imgPoster)
-        Glide.with(this).load("https://image.tmdb.org/t/p/w500"+movie.backdropPath).into(detailMovieBinding.imgBackdrop)
+        EspressoIdlingResource.increment()
+        Glide.with(this).load( BuildConfig.API_PATH_IMAGE + movie.posterPath).into(detailMovieBinding.imgPoster)
+        Glide.with(this).load(BuildConfig.API_PATH_IMAGE + movie.backdropPath).into(detailMovieBinding.imgBackdrop)
         detailMovieBinding.tvDate.text = formatDate(movie.releaseDate)
-        detailMovieBinding.tvTitle.text = movie.title
+
         detailMovieBinding.tvSynopsis.text = movie.overview
         detailMovieBinding.tvOriginal.text = movie.originalTitle
         detailMovieBinding.tvHomepage.text = movie.homepage
@@ -65,7 +64,8 @@ class DetailMovie : AppCompatActivity() {
         detailMovieBinding.chartPopularity.setProgress(movie.voteAverage * 10F, true)
         detailMovieBinding.tvBudget.text = formatCurrency(movie.budget)
         detailMovieBinding.tvRevenue.text = formatCurrency(movie.revenue)
-        detailMovieBinding.btnTrailer.setOnClickListener {
+        detailMovieBinding.tvTitle.text = movie.title
+        detailMovieBinding.btnHomePage.setOnClickListener {
             val intent = Intent(this, WebViewActivity::class.java)
             intent.putExtra(WebViewActivity.EXTRA_LINKS, movie.homepage)
             startActivity(intent)
@@ -78,6 +78,7 @@ class DetailMovie : AppCompatActivity() {
         for (language in movie.spokenLanguages){
             this.generateButtonTextView(language.englishName, detailMovieBinding.llLanguage)
         }
+        EspressoIdlingResource.decrement()
     }
 
 

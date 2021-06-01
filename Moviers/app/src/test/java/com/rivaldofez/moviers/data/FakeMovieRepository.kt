@@ -1,23 +1,15 @@
-package com.rivaldofez.moviers.data.source
+package com.rivaldofez.moviers.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.rivaldofez.moviers.data.source.MovieDataSource
 import com.rivaldofez.moviers.data.source.remote.response.RemoteDataSource
 import com.rivaldofez.moviers.data.source.remote.response.movie.MovieEntityResponse
 import com.rivaldofez.moviers.data.source.remote.response.movie.MovieItem
 
-class MovieRepository(private val remoteDataSource: RemoteDataSource): MovieDataSource {
+class FakeMovieRepository(private val remoteDataSource: RemoteDataSource): MovieDataSource {
 
     val isLoading = MutableLiveData<Boolean>()
-
-    companion object{
-        @Volatile
-        private var instance: MovieRepository? = null
-        fun getInstance(remoteDataSource: RemoteDataSource): MovieRepository =
-                instance ?: synchronized(this){
-                    instance ?: MovieRepository(remoteDataSource).apply { instance = this }
-                }
-    }
 
     override fun getPopularMovies(): LiveData<List<MovieItem>> {
         isLoading.value = true
@@ -40,6 +32,7 @@ class MovieRepository(private val remoteDataSource: RemoteDataSource): MovieData
                 detailMovieResult.postValue(movieEntityResponse)
             }
         }, movieId)
+
         return detailMovieResult
     }
 }

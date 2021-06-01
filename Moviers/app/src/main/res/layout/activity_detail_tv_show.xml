@@ -141,7 +141,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_synopsis_title"
-            tools:text="Senin, 17 Desember 2021" />
+            tools:text="Lorem ipsum dolor sit amet" />
 
         <TextView
             android:id="@+id/tv_more_title"
@@ -252,7 +252,7 @@
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_season_title"
-            tools:text="10 season"/>
+            tools:text="10"/>
 
         <TextView
             android:id="@+id/tv_episode_title"
@@ -276,7 +276,7 @@
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_episode_title"
-            tools:text="10 season"/>
+            tools:text="20"/>
 
         <TextView
             android:id="@+id/tv_homepage_title"
@@ -328,7 +328,7 @@
 
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_trailer"
+            android:id="@+id/btn_home_page"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"

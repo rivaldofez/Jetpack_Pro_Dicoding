@@ -16,6 +16,8 @@ android {
         versionCode 1
         versionName "1.0"
         buildConfigField "String","API_KEY",'"5c41e9ac1ddf213d882b35c7c2ab8586"'
+        buildConfigField "String","API_PATH_IMAGE",'"https://image.tmdb.org/t/p/w500"'
+        buildConfigField "String","API_BASE_PATH",'"https://api.themoviedb.org/3/"'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -60,20 +62,12 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp3_version"
 
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation "androidx.navigation:navigation-fragment-ktx:$navVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$navVersion"
+    implementation "androidx.legacy:legacy-support-v4:$legacySupportVersion"
 
-    implementation "com.google.dagger:dagger-android:$daggerVersion"
-    implementation "com.google.dagger:dagger-android-support:$daggerVersion"
-    annotationProcessor "com.google.dagger:dagger-android-processor:$daggerVersion"
-    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
-
-    implementation 'com.ramijemli.percentagechartview:percentagechartview:0.3.0'
-    implementation 'com.gauravk.bubblenavigation:bubblenavigation:1.0.7'
-
-    //testing
-    implementation "androidx.test.espresso:espresso-idling-resource:$idleResourceVersion"
+    implementation "com.ramijemli.percentagechartview:percentagechartview:$percentageChartVersion"
+    implementation "com.gauravk.bubblenavigation:bubblenavigation:$bubbleNavigationVersion"
 
     testImplementation "junit:junit:$junitVersion"
     androidTestImplementation "junit:junit:$junitVersion"
@@ -86,5 +80,6 @@ dependencies {
     testImplementation "org.mockito:mockito-inline:$mockitoVersion"
     testImplementation "androidx.arch.core:core-testing:$androidCoreTestVersion"
     testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockitoKotlinVersion"
+    implementation "androidx.test.espresso:espresso-idling-resource:$idleResourceVersion"
 
 }

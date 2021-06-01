@@ -1,5 +1,6 @@
 package com.rivaldofez.moviers.data.source.remote.config
 
+import com.rivaldofez.moviers.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -14,7 +15,7 @@ class ApiConfig {
                     .addInterceptor(loggingInterceptor)
                     .build()
             val retrofit = Retrofit.Builder()
-                    .baseUrl("https://api.themoviedb.org/3/")
+                    .baseUrl(BuildConfig.API_BASE_PATH)
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(client)
                     .build()
