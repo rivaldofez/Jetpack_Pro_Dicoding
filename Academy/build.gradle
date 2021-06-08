@@ -24,6 +24,7 @@ buildscript {
         daggerVersion = '2.35.1'
         roomVersion = '2.2.3'
         roomRuntimeVersion = '2.2.5'
+        pagingVersion = '2.1.1'
     }
     repositories {
         google()
