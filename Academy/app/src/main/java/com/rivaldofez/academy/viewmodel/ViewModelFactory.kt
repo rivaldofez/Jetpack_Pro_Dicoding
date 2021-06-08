@@ -3,7 +3,7 @@ package com.rivaldofez.academy.viewmodel
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.rivaldofez.academy.data.source.AcademyRepository
+import com.rivaldofez.academy.data.AcademyRepository
 import com.rivaldofez.academy.di.Injection
 import com.rivaldofez.academy.ui.academy.AcademyViewModel
 import com.rivaldofez.academy.ui.bookmark.BookmarkViewModel

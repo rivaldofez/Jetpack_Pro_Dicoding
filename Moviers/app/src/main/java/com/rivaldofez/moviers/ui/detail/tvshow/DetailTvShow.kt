@@ -12,7 +12,6 @@ import com.rivaldofez.moviers.R
 import com.rivaldofez.moviers.databinding.ActivityDetailTvShowBinding
 import com.rivaldofez.moviers.data.source.remote.response.tvshow.TvShowEntityResponse
 import com.rivaldofez.moviers.ui.webview.WebViewActivity
-import com.rivaldofez.moviers.utils.DataDummy
 import com.rivaldofez.moviers.utils.formatDate
 import com.rivaldofez.moviers.utils.generateButtonTextView
 import com.rivaldofez.moviers.viewmodel.ViewModelFactoryTvShow

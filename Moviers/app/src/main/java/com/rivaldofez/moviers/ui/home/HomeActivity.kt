@@ -1,15 +1,11 @@
 package com.rivaldofez.moviers.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
-import androidx.navigation.ui.setupWithNavController
 import com.rivaldofez.moviers.R
 import com.rivaldofez.moviers.databinding.ActivityHomeBinding
-import com.rivaldofez.moviers.ui.home.movie.MovieFragment
 import com.rivaldofez.moviers.ui.home.movie.MovieFragmentDirections
-import com.rivaldofez.moviers.ui.home.tvshow.TvShowFragment
 import com.rivaldofez.moviers.ui.home.tvshow.TvShowFragmentDirections
 
 class HomeActivity : AppCompatActivity() {
@@ -20,7 +16,7 @@ class HomeActivity : AppCompatActivity() {
         homeBinding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(homeBinding.root)
 
-        homeBinding.bnavMain.setNavigationChangeListener{view, position ->
+        homeBinding.bnavMain.setNavigationChangeListener{ _, position ->
             when(position){
                 0 -> {
                     val movieFragment = TvShowFragmentDirections.actionTvShowFragmentToMovieFragment()

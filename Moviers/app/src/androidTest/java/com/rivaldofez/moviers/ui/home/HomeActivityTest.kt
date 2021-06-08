@@ -63,23 +63,6 @@ class HomeActivityTest{
             onView(withId(idAttr)).check(matches(isDisplayed()))
         }
 
-        //check value and match textview with data
-        onView(withId(R.id.tv_title)).check(matches(withText(dummyDetailMovie.title)))
-        onView(withId(R.id.tv_duration)).check(matches(withText(formatRuntime(dummyDetailMovie.runtime))))
-        onView(withId(R.id.tv_date)).check(matches(withText(formatDate(dummyDetailMovie.releaseDate))))
-        onView(withId(R.id.tv_synopsis)).check(matches(withText(dummyDetailMovie.overview)))
-        onView(withId(R.id.tv_original)).check(matches(withText(dummyDetailMovie.originalTitle)))
-        onView(withId(R.id.tv_homepage)).check(matches(withText(dummyDetailMovie.homepage)))
-        onView(withId(R.id.tv_budget)).check(matches(withText(formatCurrency(dummyDetailMovie.budget))))
-        onView(withId(R.id.tv_revenue)).check(matches(withText(formatCurrency(dummyDetailMovie.revenue))))
-        onView(withId(R.id.tv_status)).check(matches(withText(dummyDetailMovie.status)))
-
-        //check vote chart assignable
-        onView(withId(R.id.chart_popularity)).check(matches(isAssignableFrom(PercentageChartView::class.java)))
-
-        //check-match num of child item of languages and genre which  generated from data
-        onView(withId(R.id.ll_language)).check(matches(hasChildCount(dummyDetailMovie.spokenLanguages.size)))
-        onView(withId(R.id.ll_genre)).check(matches(hasChildCount(dummyDetailMovie.genres.size)))
     }
 
     @Test
@@ -124,24 +107,6 @@ class HomeActivityTest{
         for(idAttr in tvShowAttribute){
             onView(withId(idAttr)).check(matches(isDisplayed()))
         }
-
-        //check value and match textview with data
-        onView(withId(R.id.tv_title)).check(matches(withText(dummyDetailTvShow.name)))
-        onView(withId(R.id.tv_latest_episode)).check(matches(withText("Latest Run ${dummyDetailTvShow.episodeRunTime}")))
-        onView(withId(R.id.tv_date)).check(matches(withText(formatDate(dummyDetailTvShow.firstAirDate))))
-        onView(withId(R.id.tv_synopsis)).check(matches(withText(dummyDetailTvShow.overview)))
-        onView(withId(R.id.tv_original)).check(matches(withText(dummyDetailTvShow.originalName)))
-        onView(withId(R.id.tv_homepage)).check(matches(withText(dummyDetailTvShow.homepage)))
-        onView(withId(R.id.tv_season)).check(matches(withText(dummyDetailTvShow.numberOfSeasons.toString())))
-        onView(withId(R.id.tv_episode)).check(matches(withText(dummyDetailTvShow.numberOfEpisodes.toString())))
-        onView(withId(R.id.tv_status)).check(matches(withText(dummyDetailTvShow.status)))
-
-        //check vote chart assignable
-        onView(withId(R.id.chart_popularity)).check(matches(isAssignableFrom(PercentageChartView::class.java)))
-
-        //check-match num of child item of languages and genre which  generated from data
-        onView(withId(R.id.ll_language)).check(matches(hasChildCount(dummyDetailTvShow.spokenLanguages.size)))
-        onView(withId(R.id.ll_genre)).check(matches(hasChildCount(dummyDetailTvShow.genres.size)))
     }
 
     @Test
